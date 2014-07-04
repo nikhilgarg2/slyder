@@ -1,0 +1,47 @@
+<html>
+<head>
+  
+    
+</head>
+
+<body>
+
+<form method='POST' action=''>{% csrf_token %}
+<h4> Website details </h4>
+{{ form.as_table}}
+<input type='submit' name="button3" value="button3">
+</form>
+
+
+<form method='POST' action=''>{% csrf_token %}
+<h4> Crawl URL Details </h4>
+{{preset_form.as_table}}
+<input type='submit' name="button2" value="button2">
+</form>
+
+
+<form method='POST' action=''>{% csrf_token %}
+<h4> PROD ID </h4>{{ prod.as_table}}
+<input type='submit' name="button1" value="button1">
+</form>
+
+
+
+<form method='POST' action=''>{% csrf_token %}
+<h4> Crawl Attributes Details </h4>
+{{crawl_attri.as_table}}
+<input type='submit' name="button4" value="button4">
+</form>
+
+
+
+<form method='POST' action=''>{% csrf_token %}
+<h4> Crawl Url Css Details </h4>
+{{crawl_css.as_table}}
+<input type='submit' name="button5" value="button5">
+</form>
+
+
+</body>
+
+</html>     
