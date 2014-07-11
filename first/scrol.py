@@ -1,0 +1,71 @@
+from selenium import webdriver
+import MySQLdb
+import time
+#from .compile import compile1
+from .connect import *
+from .dump import compile2
+from .reconcile import reconcile
+
+
+def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
+    
+    sql1="SELECT * FROM `crawl_url` WHERE `id`='%d'" % (int(crawl))
+    cursor.execute(sql1)
+    trying=cursor.fetchone()
+    driver=webdriver.Firefox()
+    driver.get(trying[2])
+    sql1="SELECT * FROM `scroll` WHERE `web_id`='%d'" %(int(trying[1]))
+    cursor.execute(sql1)
+    final=cursor.fetchone()
+    print "done"
+    
+    if final[1]==False:
+     for i in range(100):
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") # scroll to bottom of page
+        time.sleep(5)
+     compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)      
+    
+    elif final[1] == True and final[3]==True:
+     while True:
+      try:
+        driver.find_element_by_xpath(final[2])  #
+        try:
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
+            compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
+            print 'final[2]'
+            time.sleep(5)
+            if driver.find_element_by_xpath(final[2]).is_enabled():
+             driver.find_element_by_xpath(final[2]).click()
+            time.sleep(5)
+        except Exception as e:
+            print e
+            continue
+      except Exception as d:
+        print d
+        break
+     
+    
+    elif final[1]==True and final[3]==False:
+        while True:
+            try:
+                driver.find_element_by_xpath(final[2])  #
+                try:
+                    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                    time.sleep(5)
+                    if driver.find_element_by_xpath(final[2]).is_enabled():
+                      driver.find_element_by_xpath(final[2]).click()
+                    time.sleep(8)
+                except Exception as e:
+                    continue
+            except Exception as d:
+                 break
+        print 'trying again'
+        compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
+        
+    driver.close()
+    
+    reconcile(category)
+ #   item_dump()
+    
+    

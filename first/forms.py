@@ -23,12 +23,17 @@ class crawl_attribute1(forms.ModelForm):
 
 class crawl_url_attribute_css_sel1(forms.ModelForm):
     class Meta:
-        model = crawl_url_attribute_css_sel
+        model = final
         exclude=[]
         
 class prodid1(forms.ModelForm):
     class Meta:
-        model=prodid
+        model=cat
         exclude=[]
-    #code
+
+class scroll1(forms.ModelForm):
+    class Meta:
+        model=scroll
+        exclude=[]
+#code
 

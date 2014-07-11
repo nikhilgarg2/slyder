@@ -3,16 +3,16 @@ from django.http import HttpResponseRedirect
 from .forms import *
 from selenium import webdriver
 import MySQLdb
-from .compile import compile1
+#from .compile import compile1
 from .models import *
-
+from .scrol import scroll_first
 def my_view(request):
     form = first_form()
     preset_form = websiteform()
     crawl_attri = crawl_attribute1()
     crawl_css=crawl_url_attribute_css_sel1()
     prod=prodid1()
-    
+    scro=scroll1()
     if request.method=="POST":
       if 'button2' in request.POST:
         preset_form=websiteform(request.POST or None)
@@ -36,7 +36,7 @@ def my_view(request):
           return HttpResponseRedirect('')         
       
       elif 'button4' in request.POST:
-        print 'x'
+        #print 'x'
         crawl_attri=crawl_attribute1(request.POST)
         if crawl_attri.is_valid():
          save_it=crawl_attri.save(commit=False)
@@ -46,21 +46,29 @@ def my_view(request):
       elif 'button5' in request.POST:
         crawl_css=crawl_url_attribute_css_sel1(request.POST or None)
         if crawl_css.is_valid():
-         css=request.POST['css_sel']
-         crawl_at=request.POST['crawl_attribute_id']
-         crawl_id=request.POST['crawl_url_id']
-         text1=request.POST['text_ar']
+         css=request.POST['parent_css']
          prod=request.POST['prod_id']
-         compile1(css,crawl_at, crawl_id, text1, prod)
-         try3=crawl_url_attribute_css_sel.objects.filter(css_sel__contains=css)
-         if len(try3)==0:
-          save_it=crawl_css.save(commit=False)
-          save_it.save()
+         proda=request.POST['prod_attribute']
+         naam=request.POST['name']
+         maxrp=request.POST['mrp']
+         sellp=request.POST['sp']
+         crawl=request.POST['crawl_id']
+         category=request.POST['cat']
+         save_it=crawl_css.save(commit=False)
+         save_it.save()
+         scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category)
          return HttpResponseRedirect('')
-    
+     
+     
+      elif 'button6' in request.POST:
+        scro=scroll1(request.POST or None)
+        if scro.is_valid():
+            save_it=scro.save(commit=False)
+            save_it.save()
+            return HttpResponseRedirect('')
        
     return render_to_response('signup.html',{'preset_form': preset_form,'form':form,
-            'crawl_attri':crawl_attri,'crawl_css':crawl_css,'prod':prod},RequestContext(request))
+            'crawl_attri':crawl_attri,'crawl_css':crawl_css,'prod':prod,'scro':scro},RequestContext(request))
 
 
 

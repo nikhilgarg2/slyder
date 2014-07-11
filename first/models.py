@@ -2,13 +2,13 @@ from django.db import models
 from django.utils.encoding import smart_unicode      
 from django import forms
 
-class text1(models.Model):
+'''class text1(models.Model):
     class Meta:
         db_table='text1'
     text_ar=models.CharField(max_length=10)
     def __unicode__(self):
         return smart_unicode(self.text_ar)
-
+'''
 
 class website(models.Model):
     class Meta:
@@ -42,18 +42,16 @@ class crawl_attribute(models.Model):
         return smart_unicode(self.name)
 
     
-class prodid(models.Model):
+class cat(models.Model):
     class Meta:
-        db_table='prodid'
-    css_sel_id=models.CharField(max_length=100,unique=True)
-    web_id=models.ForeignKey(website,db_column='web_id')
-    text_ar=models.ForeignKey(text1,db_column='text_ar')
-    attribute=models.CharField(max_length=100,null=True, blank=True)
+        db_table='cat'
+    category=models.CharField(max_length=45)
+    
     def __unicode__(self):
-        return smart_unicode(self.css_sel_id)
+        return smart_unicode(self.category)
     
     
-class crawl_url_attribute_css_sel(models.Model):
+'''class crawl_url_attribute_css_sel(models.Model):
     class Meta:
         db_table='crawl_url_attribute_css_sel'
     css_sel=models.CharField(max_length=100)
@@ -66,21 +64,49 @@ class crawl_url_attribute_css_sel(models.Model):
     attribute=models.CharField(max_length=100, null=True, blank=True)   
     def __unicode__(self):
         return smart_unicode(self.css_sel)
+'''
 
-
-
-
-class crawl_url_attribute_css_sel_value(models.Model):
+    
+class scroll(models.Model):
     class Meta:
-        db_table='crawl_url_attribute_css_sel_value'
+        db_table='scroll'
+    click=models.BooleanField()
+    click_id=models.CharField(max_length=45,unique=True,null=True, blank=True)
+    scrape_before_click=models.BooleanField()
+    web_id=models.ForeignKey(website,db_column='web_id')
+        #code
+
+class final(models.Model):
+    class Meta:
+        db_table='final'
+    parent_css=models.CharField(max_length=45)
+    prod_id=models.CharField(max_length=45)
+    prod_attribute=models.CharField(max_length=45)
+    name=models.CharField(max_length=45)
+    mrp=models.CharField(max_length=45)
+    sp=models.CharField(max_length=45)
+    crawl_id=models.ForeignKey(crawl_url,db_column='crawl_id')
+    cat=models.ForeignKey(cat,db_column='cat')
+    
+    def __unicode__(self):
+        return smart_unicode(self.parent_css)
+    #code
+
+class dump_val(models.Model):
+    class Meta:
+        db_table='dump_val'
     crawl_item_id=models.CharField(max_length=45)
-    value=models.TextField()
-    crawl_url_attribute_css_sel_id=models.ForeignKey(crawl_url_attribute_css_sel,db_column='crawl_url_attribute_css_sel_id')
+    name=models.TextField()
+    mrp=models.CharField(max_length=20)
+    sp=models.TextField(max_length=20)
+    final_id=models.ForeignKey(final,db_column='final_id')
     crawl_date=models.DateTimeField(auto_now_add=True)
     reconciled=models.BooleanField()
     reconciled_date=models.DateTimeField(auto_now_add=True)
     
-
-        #code
-    
+class item(models.Model):
+    class Meta:
+        db_table='item'
+    name=models.CharField(max_length=100)
+    category_id=models.ForeignKey(cat,db_column='category_id')
 

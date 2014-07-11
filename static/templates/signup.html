@@ -21,7 +21,7 @@
 
 
 <form method='POST' action=''>{% csrf_token %}
-<h4> PROD ID </h4>{{ prod.as_table}}
+<h4> CATEGORY </h4>{{ prod.as_table}}
 <input type='submit' name="button1" value="button1">
 </form>
 
@@ -33,6 +33,12 @@
 <input type='submit' name="button4" value="button4">
 </form>
 
+<form method='post' action=''>{% csrf_token %}
+<h4> Scroll Details </h4>
+{{scro.as_table}}
+<input type='submit' name="button6" value="button6">
+    
+</form>
 
 
 <form method='POST' action=''>{% csrf_token %}
