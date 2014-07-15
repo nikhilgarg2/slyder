@@ -7,8 +7,9 @@ from fuzzywuzzy import fuzz
 
 
 def reconcile(category):
-    sql="SELECT * FROM `item` WHERE `category_id`=%d" % int(category)
-    cursor.execute(sql)
+    sql="SELECT * FROM `item` WHERE `category_id`=%s"
+    tal=category
+    cursor.execute(sql,tal)
     fetch=cursor.fetchall()
     if len(fetch)==0:
         sql="SELECT `name` FROM `dump_val`"
@@ -40,7 +41,7 @@ def reconcile(category):
             values=(fetch[e][5],id1[0],category,fetch[e][1],x,m,s)
             cursor.execute(sql,values)
             db.commit()
-        sql3="DELETE * FROM `dump_val`"
+        sql3="DELETE FROM `dump_val`"
         cursor.execute(sql3)
         db.commit()
         

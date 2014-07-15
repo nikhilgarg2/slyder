@@ -56,7 +56,7 @@ class final(models.Model):
     class Meta:
         db_table='final'
     parent_css=models.CharField(max_length=45)
-    prod_id=models.CharField(max_length=45)
+    prod_id=models.CharField(max_length=45,null=True, blank=True)
     prod_attribute=models.CharField(max_length=45)
     name=models.CharField(max_length=45)
     mrp=models.CharField(max_length=45)
@@ -75,7 +75,7 @@ class dump_val(models.Model):
     name=models.TextField()
     mrp=models.CharField(max_length=20)
     sp=models.TextField(max_length=20)
-    final_id=models.ForeignKey(final,db_column='final_id')
+    final_id=models.ForeignKey(website,db_column='final_id')
     crawl_date=models.DateTimeField(auto_now_add=True)
     reconciled=models.BooleanField()
     reconciled_date=models.DateTimeField(auto_now_add=True)
@@ -89,7 +89,7 @@ class item(models.Model):
 class item_done(models.Model):
     class Meta:
         db_table='item_done'
-    crawl_id=models.ForeignKey(final,db_column='crawl_id')
+    crawl_id=models.ForeignKey(website,db_column='crawl_id')
     item_id=models.ForeignKey(item,db_column='item_id')
     cat_id=models.ForeignKey(cat,db_column='cat_id')
     website_item=models.CharField(max_length=45)

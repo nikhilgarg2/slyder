@@ -25,7 +25,11 @@ def compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
     trying=cursor.fetchone()
     parent=[]
     parent=driver.find_elements_by_css_selector(css)
-    print trying[0]
+    #print trying[0]
+    sql3="SELECT * FROM `crawl_url` WHERE `id`= %s"
+    valus=trying[7]
+    cursor.execute(sql3,valus)
+    try2=cursor.fetchone()
     for e in parent:
         p=get1(e,prod,proda)
         n=get2(e,naam)
@@ -35,7 +39,7 @@ def compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
             m=s
         sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
              `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
-        values=(p,n,m,s,trying[0],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
+        values=(p,n,m,s,try2[1],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
         cursor.execute(sql1,values)
         db.commit()
     

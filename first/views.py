@@ -72,8 +72,16 @@ def my_view(request):
         searc=search1(request.POST or None)
         if searc.is_valid():
             if 'd_box' in request.POST:
-                price_map=item_done.objects.raw('SELECT * FROM `item_done` WHERE `cat_id`=%s', [request.POST['d_box']])
+                item_map=item.objects.raw('SELECT * FROM `item` WHERE `category_id`=%s', [request.POST['d_box']])
+                lis=[]
+                for e in (item_map):
+                    lis.append(e.id)
+                    
+                price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id')
+                
+                         
                 template_data={'posts':price_map}
+                
                 return render_to_response('index.html', template_data,RequestContext(request))
             #return HttpResponseRedirect('')
        
