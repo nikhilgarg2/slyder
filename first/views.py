@@ -11,6 +11,7 @@ def my_view(request):
     preset_form = websiteform()
     crawl_attri = crawl_attribute1()
     crawl_css=crawl_url_attribute_css_sel1()
+    searc=search1()
     prod=prodid1()
     scro=scroll1()
     if request.method=="POST":
@@ -65,10 +66,19 @@ def my_view(request):
         if scro.is_valid():
             save_it=scro.save(commit=False)
             save_it.save()
-            return HttpResponseRedirect('')
+            return HttpResponseRedirect('') 
+     
+      elif 'button7' in request.POST:
+        searc=search1(request.POST or None)
+        if searc.is_valid():
+            if 'd_box' in request.POST:
+                price_map=item_done.objects.raw('SELECT * FROM `item_done` WHERE `cat_id`=%s', [request.POST['d_box']])
+                template_data={'posts':price_map}
+                return render_to_response('index.html', template_data,RequestContext(request))
+            #return HttpResponseRedirect('')
        
     return render_to_response('signup.html',{'preset_form': preset_form,'form':form,
-            'crawl_attri':crawl_attri,'crawl_css':crawl_css,'prod':prod,'scro':scro},RequestContext(request))
+            'crawl_attri':crawl_attri,'crawl_css':crawl_css,'prod':prod,'scro':scro,'searc':searc},RequestContext(request))
 
 
 

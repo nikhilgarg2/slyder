@@ -1,0 +1,17 @@
+<table border="4" style="width:1000px">
+    <tbody>
+            <th>Name</th>
+            <th>MRP</th>
+            <th>Selling Price</th>        
+        {% for p in posts %}
+        <tr>
+            <td>{{p.name}}</td>
+            <td>{{p.mrp}}</td>
+            <td>{{p.site_price}}</td>
+        </tr>
+        {% endfor %}    
+    </tbody>
+</table>
+
+
+

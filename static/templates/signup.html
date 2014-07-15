@@ -47,6 +47,12 @@
 <input type='submit' name="button5" value="button5">
 </form>
 
+<form method='POST' action=''>{% csrf_token %}
+<h4> SEARCH </h4>
+{{searc.as_table}}
+<input type='submit' name="button7" value="button7">
+</form>
+
 
 </body>
 

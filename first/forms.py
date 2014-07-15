@@ -35,5 +35,9 @@ class scroll1(forms.ModelForm):
     class Meta:
         model=scroll
         exclude=[]
-#code
+
+class search1(forms.ModelForm):
+    class Meta:
+        model=search
+        exclude=[]
 
