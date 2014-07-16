@@ -69,11 +69,11 @@ def reconcile(category):
                 y=str(array[j][5])
                 if 0.9*m <= float(array[j][6]) <= 1.1* m:    
                     rat=fuzz.token_set_ratio(x,y)
-                    if rat>= 75 and rat > mrt:
+                    if rat>= 85 and rat > mrt:
                         t=True
                         mrt=rat    
                         i_id=array[j][2]    
-            print t
+           # print t
             if t==False:
                 sql2="INSERT INTO `item`(`name`,`category_id`) VALUES(%s,%s)"
                 values=(x,category)

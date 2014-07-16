@@ -83,9 +83,13 @@ class dump_val(models.Model):
 class item(models.Model):
     class Meta:
         db_table='item'
-    name=models.CharField(max_length=100)
+    name=models.CharField(max_length=220)
     category_id=models.ForeignKey(cat,db_column='category_id')
     
+    def __unicode__(self):
+        return smart_unicode(self.id)
+
+
 class item_done(models.Model):
     class Meta:
         db_table='item_done'
@@ -93,7 +97,7 @@ class item_done(models.Model):
     item_id=models.ForeignKey(item,db_column='item_id')
     cat_id=models.ForeignKey(cat,db_column='cat_id')
     website_item=models.CharField(max_length=45)
-    name=models.CharField(max_length=200)
+    name=models.CharField(max_length=220)
     mrp=models.DecimalField(max_digits=10,decimal_places=2)
     site_price=models.DecimalField(max_digits=10, decimal_places=2)
    
