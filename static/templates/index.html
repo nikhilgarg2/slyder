@@ -1,24 +1,52 @@
-<table border="4" style="width:1050px">
-    <tbody>
+{% regroup posts by item_id as post_list %}
+
+<table border="4" style="width:1050px;border-collapse: collapse" >
+    <thead>
             <tr>
             <th>Item Codes</th>
             <th>Name</th>
             <th>MRP</th>
-            <th>Selling Price</th>        
+            <th>Site price</th>
             <th>Website</th>
             </tr>
-        {% for p in posts %}
-                  
-                
-            <tr style="background: #ccc;">    
-            <td>{{p.item_id}}</td>
-            <td>{{p.name}}</td>
-            <td>{{p.mrp}}</td>
-            <td>{{p.site_price}}</td>
-            <td>{{p.crawl_id}}</td>
-        </tr>
-        {% endfor %}    
-    </tbody>
-</table>
+        
+          </thead>        
+     <tbody>           
+        
 
+{% for country in post_list %}
+    
+    <tr>
+    <td>{{ country.grouper }}</td>
+    <td>
+        {% for item in country.list %}
+        <div style="margin: 5px 0">{{item.name}}</div>
+        {% endfor %}    
+    </td>
+       
+       
+       <td>
+        {% for item in country.list %}
+        <div style="margin: 5px 0">{{item.mrp}}</div>
+        {% endfor %}    
+    </td>
+    
+    <td>
+        {% for item in country.list %}
+        <div style="margin: 5px 0">{{item.site_price}}</div>
+        {% endfor %}    
+    </td>
+    
+    <td>
+        {% for item in country.list %}
+        <div style="margin: 5px 0">{{item.crawl_id}}</div>
+        {% endfor %}    
+    </td>
+    
+    
+    </tr>
+{% endfor %}
+
+     </tbody>
+</table>
 
