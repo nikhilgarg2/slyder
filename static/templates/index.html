@@ -1,3 +1,15 @@
+<html>
+<head>   
+</head>
+
+<body>
+<form method='POST' action=''>{% csrf_token %}
+<h4> SEARCH </h4>
+{{posts1.as_table}}
+<input type='submit' name="button7" value="button7">
+</form>
+
+
 {% regroup posts by item_id as post_list %}
 
 <table border="4" style="width:1050px;border-collapse: collapse" >
@@ -20,26 +32,26 @@
     <td>{{ country.grouper }}</td>
     <td>
         {% for item in country.list %}
-        <div style="margin: 5px 0">{{item.name}}</div>
+        <div style="margin: 5px 5px">{{item.name}}</div>
         {% endfor %}    
     </td>
        
        
        <td>
         {% for item in country.list %}
-        <div style="margin: 5px 0">{{item.mrp}}</div>
+        <div style="margin: 5px 5px">{{item.mrp}}</div>
         {% endfor %}    
     </td>
     
     <td>
         {% for item in country.list %}
-        <div style="margin: 5px 0">{{item.site_price}}</div>
+        <div style="margin: 5px 5px">{{item.site_price}}</div>
         {% endfor %}    
     </td>
     
     <td>
         {% for item in country.list %}
-        <div style="margin: 5px 0">{{item.crawl_id}}</div>
+        <div style="margin: 5px 5px">{{item.crawl_id}}</div>
         {% endfor %}    
     </td>
     
@@ -49,4 +61,4 @@
 
      </tbody>
 </table>
-
+</html>

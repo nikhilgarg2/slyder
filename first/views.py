@@ -6,12 +6,13 @@ import MySQLdb
 #from .compile import compile1
 from .models import *
 from .scrol import scroll_first
+
+
 def my_view(request):
     form = first_form()
     preset_form = websiteform()
     crawl_attri = crawl_attribute1()
     crawl_css=crawl_url_attribute_css_sel1()
-    searc=search1()
     prod=prodid1()
     scro=scroll1()
     if request.method=="POST":
@@ -68,26 +69,8 @@ def my_view(request):
             save_it.save()
             return HttpResponseRedirect('') 
      
-      elif 'button7' in request.POST:
-        searc=search1(request.POST or None)
-        if searc.is_valid():
-            if 'd_box' in request.POST:
-                item_map=item.objects.raw('SELECT * FROM `item` WHERE `category_id`=%s', [request.POST['d_box']])
-                lis=[]
-                for e in (item_map):
-                    lis.append(e.id)
-                    
-                price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id')
-                
-                         
-                template_data={'posts':price_map}
-                
-                return render_to_response('index.html', template_data,RequestContext(request))
-            #return HttpResponseRedirect('')
-       
+      
     return render_to_response('signup.html',{'preset_form': preset_form,'form':form,
-            'crawl_attri':crawl_attri,'crawl_css':crawl_css,'prod':prod,'scro':scro,'searc':searc},RequestContext(request))
+            'crawl_attri':crawl_attri,'crawl_css':crawl_css,'prod':prod,'scro':scro},RequestContext(request))
 
 
-
-    

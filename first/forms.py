@@ -1,6 +1,8 @@
 # forms.py
 from django import forms
 from .models import *
+
+from .models import search
 #from .models import website
        
 class first_form(forms.ModelForm):
