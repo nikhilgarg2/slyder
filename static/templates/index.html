@@ -3,28 +3,37 @@
 </head>
 
 <body>
-<form method='POST' action=''>{% csrf_token %}
-<h4> SEARCH </h4>
-{{posts1.as_table}}
-<input type='submit' name="button7" value="button7">
+<br><br>
+<form method='POST' action='' align="center">{% csrf_token %}
+<font color="grey" size="7" align="center"> SEARCH </font><br><br><br>
+
+<font color="grey" size="4" padding-left:10px>By Category:{{posts1.d_box}}<br><br>
+By Name:{{posts1.name}}<br><br>
+</font>
+<input type="submit" name="button7" value="button7" >
+
 </form>
+<br>
+    <br>
+        <br><hr>
 
-
+        <br><br>
 {% regroup posts by item_id as post_list %}
 
-<table border="4" style="width:1050px;border-collapse: collapse" >
+<table border="4" style="width:1050px;border-collapse: collapse" align="center">
     <thead>
-            <tr>
+            <tr color="grey" size="8">
+            
             <th>Item Codes</th>
             <th>Name</th>
             <th>MRP</th>
             <th>Site price</th>
             <th>Website</th>
             </tr>
-        
+            
           </thead>        
      <tbody>           
-        
+ 
 
 {% for country in post_list %}
     
