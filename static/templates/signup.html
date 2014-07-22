@@ -1,76 +1,72 @@
-
-
 <html>
-<head>
-  
-    <link href="/static/mystyle.css" rel="stylesheet">
-</head>
+    <head>  
+        <link href="/static/mystyle.css" rel="stylesheet">
+    </head>
 
-<body>
+    <body>
 
-<div class="heading"> WEBSITE DETAILS </div>
+        <div class="heading"> WEBSITE DETAILS </div>
 
 
-<table border="4" class="tab1">
-    <thead>
-            <tr color="grey" size="8">
+        <table border="4" class="tab1">
+            <thead>
+                <tr color="grey" size="8">
             
-            <th>Website</th>
-            <th>Frequency</th>
-            <th>Active</th>
-            <th>Click</th>
-            </tr>
+                   <th>Website</th>
+                   <th>Frequency</th>
+                   <th>Active</th>
+                   <th>Click</th>
+               </tr>
             
           </thead>
 
-{% for x in posts %}
-<tr>
-<td>
-<div class="textable">{{x.address}}</div>
-</td>
+          {% for x in posts %}
+        
+             <tr>
+                <td>
+                    <div class="textable">{{x.address}}</div>
+                </td>
 
-<td>
-    <div class="textable">{{x.frequency}}</div>
-</td>
+                <td>
+                    <div class="textable">{{x.frequency}}</div>
+                </td>
 
-<td>
-    <div class="textable">{{x.active}}</div>
-</td>
-<td>
+                <td>
+                    <div class="textable">{{x.active}}</div>
+                </td>
+                <td>
+                    <form method='POST' action='' align="center">{% csrf_token %}
+                            <input name="website_id" id="website_id" value="{{x.id}}" style="display: none"/>
+                            <input type="submit" name="button7" value="Crawl URLs" class="button">
+                    </form>
     
-    
-    <form method='POST' action='' align="center">{% csrf_token %}
-<input name="website_id" id="website_id" value="{{x.id}}" style="display: none"/>
-<input type="submit" name="button7" value="Crawl URLs" class="button">
-    </form>
-    
-</td>
+                </td>
 
-</tr>
+             </tr>
 
-{% endfor %}
+          {% endfor %}
 
-</table>
+        </table>
 
 
-<div class="heading" style="margin-top: 20px">ADD NEW</div>
+        <div class="heading" style="margin-top: 20px">ADD NEW</div>
 
-<form method='POST' action='' align="center">{% csrf_token %}
-<div class="form">
-   <label> WEBSITE NAME:</label> {{form.address}}
-</div>
-<div class="form">
-   <label> FREQUENCY:</label> {{form.frequency}}
-</div>
+        <form method='POST' action='' align="center">{% csrf_token %}
+            <div class="form">
+                  <label> WEBSITE NAME:</label> {{form.address}}
+            </div>
+            <div class="form">
+                   <label> FREQUENCY:</label> {{form.frequency}}
+            </div>
 
-<div class="form">
-<label>ACTIVE / INACTIVE: </label>{{form.active}}
-</div>
+            <div class="form">
+                    <label>ACTIVE / INACTIVE: </label>{{form.active}}
+            </div>
 
-<input class="button" type='submit' name="button3" value="Add">
+            <input class="button" type='submit' name="button3" value="Add">
 
-</form>
+        </form>
 
-</body>
+    </body>
 
 </html>   

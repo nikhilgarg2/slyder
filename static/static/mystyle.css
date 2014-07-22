@@ -5,6 +5,10 @@ text-align:center;
 margin:30px;
 }
 
+.childDiv {
+        float: left;
+        width: 50%;
+    }
 .tab1{
        width:1050px;
        border-collapse: collapse;
