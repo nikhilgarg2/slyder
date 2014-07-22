@@ -41,7 +41,10 @@ By Name:{{posts1.name}}<br><br>
     <td>{{ country.grouper }}</td>
     <td>
         {% for item in country.list %}
-        <div style="margin: 5px 5px">{{item.name}}</div>
+        <li  padding-left: 1em;
+  text-indent: -1em;>
+        <div style="margin: 5px 5px"> {{item.name}}</div>
+        </li>
         {% endfor %}    
     </td>
        

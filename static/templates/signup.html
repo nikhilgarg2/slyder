@@ -1,54 +1,76 @@
+
+
 <html>
 <head>
   
-    
+    <link href="/static/mystyle.css" rel="stylesheet">
 </head>
 
 <body>
 
-<form method='POST' action=''>{% csrf_token %}
-<h4> Website details </h4>
-{{ form.as_table}}
-<input type='submit' name="button3" value="button3">
-</form>
+<div class="heading"> WEBSITE DETAILS </div>
 
 
-<form method='POST' action=''>{% csrf_token %}
-<h4> Crawl URL Details </h4>
-{{preset_form.as_table}}
-<input type='submit' name="button2" value="button2">
-</form>
+<table border="4" class="tab1">
+    <thead>
+            <tr color="grey" size="8">
+            
+            <th>Website</th>
+            <th>Frequency</th>
+            <th>Active</th>
+            <th>Click</th>
+            </tr>
+            
+          </thead>
 
+{% for x in posts %}
+<tr>
+<td>
+<div class="textable">{{x.address}}</div>
+</td>
 
-<form method='POST' action=''>{% csrf_token %}
-<h4> CATEGORY </h4>{{ prod.as_table}}
-<input type='submit' name="button1" value="button1">
-</form>
+<td>
+    <div class="textable">{{x.frequency}}</div>
+</td>
 
-
-
-<form method='POST' action=''>{% csrf_token %}
-<h4> Crawl Attributes Details </h4>
-{{crawl_attri.as_table}}
-<input type='submit' name="button4" value="button4">
-</form>
-
-<form method='post' action=''>{% csrf_token %}
-<h4> Scroll Details </h4>
-{{scro.as_table}}
-<input type='submit' name="button6" value="button6">
+<td>
+    <div class="textable">{{x.active}}</div>
+</td>
+<td>
     
+    
+    <form method='POST' action='' align="center">{% csrf_token %}
+<input name="website_id" id="website_id" value="{{x.id}}" style="display: none"/>
+<input type="submit" name="button7" value="Crawl URLs" class="button">
+    </form>
+    
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<div class="heading" style="margin-top: 20px">ADD NEW</div>
+
+<form method='POST' action='' align="center">{% csrf_token %}
+<div class="form">
+   <label> WEBSITE NAME:</label> {{form.address}}
+</div>
+<div class="form">
+   <label> FREQUENCY:</label> {{form.frequency}}
+</div>
+
+<div class="form">
+<label>ACTIVE / INACTIVE: </label>{{form.active}}
+</div>
+
+<input class="button" type='submit' name="button3" value="Add">
+
 </form>
-
-
-<form method='POST' action=''>{% csrf_token %}
-<h4> Crawl Url Css Details </h4>
-{{crawl_css.as_table}}
-<input type='submit' name="button5" value="button5">
-</form>
-
-
 
 </body>
 
-</html>     
+</html>   
