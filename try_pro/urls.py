@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from first.views import my_view 
 #from first.views import home
 from first.views import search123
-from first.views import crawl1
+from first.views import add_details
 from django.contrib import admin
 admin.autodiscover()
 from django.conf import settings
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     #url(r'^blog1/', home),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^first/', search123),
-    url(r'^crawl/', crawl1 ),
+    url(r'^details/', add_details),
     
 
 )

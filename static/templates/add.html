@@ -1,0 +1,40 @@
+<html>
+    <head>
+
+        <link href="/static/mystyle.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <form method='POST' action='' align="Center">
+            <div class="heading">Scroll Details</div>
+            <span class="form">website : {{post.web_id}}</span>
+            <span class="form">click : {{post.click}}</span>
+            <span class="form"> click id : {{post.click_id}} </span>
+            <span class="form">scrape ? : {{post.scrape_before_click}}</span>
+            <div style="margin:30px 30px 30px 30px"><input type="submit" name="button1" value="Add" class="button"></div>
+        </form>
+        
+        <form method='POST' action='' align="center" style="margin:50px">
+            <div class="heading"> Category Details</div>
+            <span class="form"> Add a category : {{prod1.category}}</span>    
+            <div style="margin:30px 30px 30px 30px"><input type="submit" name="button2" value="Add" class="button"></div>
+        </form>
+        
+        <form method='POST' action='' align="center" style="margin: 50px">
+            <div class="heading"> Product Css Arrtibute Details </div>
+            <div class="form">
+            <span class="form">Crawl ID : {{crawl.crawl_id}}</span>
+            <span class="form">Category: {{crawl.cat}}</span>
+            <span class="form">Parent Selector:{{crawl.parent_css}}</span>
+            <span class="form">Product ID:{{crawl.prod_id}}</span>       
+            </div>
+            <div class="form">             
+            <span class="form">Product ID Attribute:{{crawl.prod_attribute}}</span>   
+            <span class="form">Name:{{crawl.name}}</span>
+            <span class="form">MRP:{{crawl.mrp}}</span>
+            <span class="form">Selling Price:{{crawl.sp}}</span>
+            </div>
+            <div>
+                <input type="submit" name="button3" value="Add" class="button">
+            </div>        
+        </form>
