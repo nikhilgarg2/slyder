@@ -1,0 +1,24 @@
+<html>
+<head>
+  
+    <link href="/static/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+    
+    <form method='POST' action='' align="center">{% csrf_token %}
+<div class="heading"> SEARCH </div>
+
+<font color="grey" size="4" padding-left:10px>By Website:{{form.website_id}}<br><br>
+</font>
+<input type="submit" name="button7" value="Search" class="button">
+    </form>
+
+<table>
+    {% for x in posts %}
+    {{x.crawl_id}}<br>
+    {% endfor %} 
+</table>
+
+</body>
+</html> 
