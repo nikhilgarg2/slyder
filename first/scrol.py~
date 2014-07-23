@@ -1,14 +1,15 @@
 from selenium import webdriver
 import MySQLdb
 import time
-from .compile import compile1
+#from .compile import compile1
 from .connect import *
-from .dump import *
+from .dump import compile2
+from .reconcile import reconcile
+from .ama_comp import compile3
 
-
-def scroll_first(css,crawl_at, crawl_id, text2, prod):
+def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
     
-    sql1="SELECT * FROM `crawl_url` WHERE `id`='%d'" % (int(crawl_id))
+    sql1="SELECT * FROM `crawl_url` WHERE `id`='%s'" % crawl
     cursor.execute(sql1)
     trying=cursor.fetchone()
     driver=webdriver.Firefox()
@@ -22,7 +23,7 @@ def scroll_first(css,crawl_at, crawl_id, text2, prod):
      for i in range(100):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") # scroll to bottom of page
         time.sleep(5)
-     compile1(css,crawl_at, crawl_id, text2, prod,driver)      
+     compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)      
     
     elif final[1] == True and final[3]==True:
      while True:
@@ -31,39 +32,44 @@ def scroll_first(css,crawl_at, crawl_id, text2, prod):
         try:
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(3)
-            compile1(css,crawl_at, crawl_id, text2, prod,driver)
+            compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
             print 'final[2]'
             time.sleep(5)
             if driver.find_element_by_xpath(final[2]).is_enabled():
              driver.find_element_by_xpath(final[2]).click()
             time.sleep(5)
         except Exception as e:
-            print e
+            compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
             continue
       except Exception as d:
-        print d
+        compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
         break
      
     
     elif final[1]==True and final[3]==False:
+        
         while True:
-            try:
+            time.sleep(8)
+            try: 
                 driver.find_element_by_xpath(final[2])  #
                 try:
+                    
                     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                     time.sleep(5)
                     if driver.find_element_by_xpath(final[2]).is_enabled():
                       driver.find_element_by_xpath(final[2]).click()
-                    time.sleep(8)
+                    
                 except Exception as e:
+                    print e
                     continue
             except Exception as d:
                  break
-        print 'trying again'
-        compile1(css,crawl_at, crawl_id, text2, prod,driver)
+        
+        compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
         
     driver.close()
     
-    item_dump()
+    reconcile(category)
+ #   item_dump()
     
     

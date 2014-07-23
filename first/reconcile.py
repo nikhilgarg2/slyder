@@ -35,8 +35,8 @@ def reconcile(category):
         for e in range(len(fetch)):
             x=str(fetch[e][2]).lower()
             x=re.sub(r'[^a-z^A-Z^0-9^\ ^\.^\%]','',x)
-            sql2="SELECT `id` FROM `item` WHERE `name`=%s"
-            value=(x)
+            sql2="SELECT `id` FROM `item` WHERE `name`=%s and `category_id`=%s"
+            value=(x,category)
             cursor.execute(sql2,value)
             id1=cursor.fetchone()
             m= re.sub(r'[^0-9^\.]','',fetch[e][3])
@@ -61,7 +61,7 @@ def reconcile(category):
         sql2="SELECT * FROM `dump_val`"
         cursor.execute(sql2)
         array2=cursor.fetchall()
-        print 'true'
+        #print 'true'
         for e in range(len(array2)):
             #print len(array2)
             x=str(array2[e][2]).lower()

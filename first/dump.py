@@ -20,7 +20,7 @@ def get2(r,attri):
 
 
 def compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
-    sql="SELECT * FROM `final` WHERE `crawl_id`=%d" % (int(crawl))
+    sql="SELECT * FROM `final` WHERE `crawl_id`=%s" % crawl
     cursor.execute(sql)
     trying=cursor.fetchone()
     parent=[]

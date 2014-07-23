@@ -1,26 +1,33 @@
 <html>
     <head>   
+    
+    <link href="/static/mystyle.css" rel="stylesheet">
+    
     </head>
 
     <body>
     <br><br>
         <form method='POST' action='' align="center">{% csrf_token %}
-            <font color="grey" size="7" align="center"> SEARCH </font><br><br><br>
+            <div class="heading"> SEARCH </div>
 
-            <font color="grey" size="4" padding-left:10px>By Category:{{posts1.d_box}}<br><br>
-                    By Name:{{posts1.name}}<br><br>
-            </font>
-<input type="submit" name="button7" value="button7" >
+            <div class="form">
+                By Category:{{posts1.d_box}}
+            </div>     
+            <div class="form">
+                    By Name:{{posts1.name}}
+            </div>
+<input type="submit" name="button7" value="button7" class="button">
 
 </form>
-<br>
-    <br>
-        <br><hr>
+<div style="margin:30px"></div>
 
-        <br><br>
+<hr>
+
+<div style="margin:30px"></div>
+
 {% regroup posts by item_id as post_list %}
 
-<table border="4" style="width:1050px;border-collapse: collapse" align="center">
+<table border="4" class="tab1">
     <thead>
             <tr color="grey" size="8">
             
@@ -43,7 +50,7 @@
         {% for item in country.list %}
         <li  padding-left: 1em;
   text-indent: -1em;>
-        <div style="margin: 5px 5px"> {{item.name}}</div>
+        <div style="margin: 5px; text-align: left"> {{item.name}}</div>
         </li>
         {% endfor %}    
     </td>
@@ -51,19 +58,19 @@
        
        <td>
         {% for item in country.list %}
-        <div style="margin: 5px 5px">{{item.mrp}}</div>
+        <div style="margin: 5px;">{{item.mrp}}</div>
         {% endfor %}    
     </td>
     
     <td>
         {% for item in country.list %}
-        <div style="margin: 5px 5px">{{item.site_price}}</div>
+        <div style="margin: 5px;">{{item.site_price}}</div>
         {% endfor %}    
     </td>
     
     <td>
         {% for item in country.list %}
-        <div style="margin: 5px 5px">{{item.crawl_id}}</div>
+        <div style="margin: 5px;">{{item.crawl_id}}</div>
         {% endfor %}    
     </td>
     

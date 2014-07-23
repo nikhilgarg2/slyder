@@ -35,8 +35,14 @@ def my_view(request):
             save_it.save()
             return HttpResponseRedirect('http://127.0.0.1:8000/details/')
       if 'button5' in request.POST:    
-        print "dimaag kharav"            
-    
+        x=request.POST['crawlid']
+        item_try=final.objects.filter(crawl_id__exact=x)
+        z=item_try[0]
+        cat_query=cat.objects.filter(category__exact=z.cat)
+        #print cat_query[0].id
+        scroll_first(z.parent_css,z.prod_id,z.prod_attribute,z.name,z.mrp,z.sp,x,cat_query[0].id)
+        #print z.cat
+        return HttpResponseRedirect('')
     return render_to_response('signup.html',{'form': first_form,'posts':website_map},RequestContext(request))  
      
 
@@ -49,11 +55,15 @@ def search123(request):
         if searc.is_valid():
             if 'd_box' in request.POST:
                 item_map=item.objects.raw('SELECT * FROM `item` WHERE `category_id`=%s', [request.POST['d_box']])
+                #print request.POST['d_box']
+                #print item_map
                 lis=[]
                 for e in (item_map):
                     lis.append(e.id)
+                #print lis
                 price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id')
-                return render_to_response('index.html',{'posts':price_map,'posts1':searc},RequestContext(request))
+                #print price_map
+                return render(request,'index.html',{'posts':price_map,'posts1':searc})
   return render_to_response('index.html',{'posts1':searc},RequestContext(request))
 
 

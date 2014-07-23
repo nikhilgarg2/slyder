@@ -92,4 +92,4 @@ def compile1(css,crawl_at, crawl_id, text2, prod,driver):
             cursor.execute(try1)
             db.commit()
     
-    print 'exiting'
+    #print 'exiting'

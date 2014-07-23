@@ -9,10 +9,12 @@ from .ama_comp import compile3
 
 def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
     
-    sql1="SELECT * FROM `crawl_url` WHERE `id`='%d'" % (int(crawl))
+    sql1="SELECT * FROM `crawl_url` WHERE `id`='%s'" % crawl
     cursor.execute(sql1)
     trying=cursor.fetchone()
-    driver=webdriver.Firefox()
+    chromedriver = "/usr/bin/chromedriver"
+    driver = webdriver.Chrome(chromedriver)
+    time.time()
     driver.get(trying[2])
     sql1="SELECT * FROM `scroll` WHERE `web_id`='%d'" %(int(trying[1]))
     cursor.execute(sql1)
@@ -47,20 +49,24 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
      
     
     elif final[1]==True and final[3]==False:
+        
         while True:
-            try:
+            time.sleep(8)
+            try: 
                 driver.find_element_by_xpath(final[2])  #
                 try:
+                    
                     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                     time.sleep(5)
                     if driver.find_element_by_xpath(final[2]).is_enabled():
                       driver.find_element_by_xpath(final[2]).click()
-                    time.sleep(8)
+                    
                 except Exception as e:
+                    print e
                     continue
             except Exception as d:
                  break
-        print 'trying again'
+        
         compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
         
     driver.close()
