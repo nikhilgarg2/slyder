@@ -2,6 +2,8 @@ from selenium import webdriver
 import MySQLdb
 import time
 from .connect import *
+from django.shortcuts import render,render_to_response, RequestContext
+from django.http import HttpResponseRedirect
 
 def get1(r,prod,proda):
     try:
@@ -19,7 +21,7 @@ def get2(r,attri):
 
 
 def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
-    sql="SELECT * FROM `final` WHERE `crawl_id`=%d" % (int(crawl))
+    sql="SELECT * FROM `final` WHERE `crawl_id`=%s" % (crawl)
     cursor.execute(sql)
     trying=cursor.fetchone()
     parent=[]
@@ -64,9 +66,12 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
                  time.sleep(5)
                  i=e[1]
                  p="N/A"
-                 n=get2(driver1,span.a-size-large)
-                 s=get2(driver1,span.a-color-price)
-                 m=get2(driver1,td.a-text-strike)
+                 naam=".a-size-large"
+                 sp=".a-color-price"
+                 mrp=".a-text-strike"
+                 n=get2(driver1,naam)
+                 s=get2(driver1,sp)
+                 m=get2(driver1,mrp)
                  if m==0:
                        m=s
                  sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
@@ -80,9 +85,12 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
                     g.find_element_by_css_selector('button.a-button-text').click()
                     time.sleep(5)
                     p="N/A"
-                    n=get2(driver1,span.a-size-large)
-                    s=get2(driver1,span.a-color-price)
-                    m=get2(driver1,td.a-text-strike)
+                    naam=".a-size-large"
+                    sp=".a-color-price"
+                    mrp=".a-text-strike"
+                    n=get2(driver1,naam)
+                    s=get2(driver1,sp)
+                    m=get2(driver1,mrp)
                     if m==0:
                        m=s
                     sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
@@ -96,9 +104,12 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
         elif len(e)==1:
   
               p="N/A"
-              n=get2(driver1,span.a-size-large)
-              s=get2(driver1,span.a-color-price)
-              m=get2(driver1,td.a-text-strike)
+              naam=".a-size-large"
+              sp=".a-color-price"
+              mrp=".a-text-strike"
+              n=get2(driver1,naam)
+              s=get2(driver1,sp)
+              m=get2(driver1,mrp)
               if m==0:
                        m=s
               sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
@@ -113,9 +124,12 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
                 g.find_element_by_css_selector('button.a-button-text').click()
                 time.sleep(5)
                 p="N/A"
-                n=get2(driver1,span.a-size-large)
-                s=get2(driver1,span.a-color-price)
-                m=get2(driver1,td.a-text-strike)
+                naam=".a-size-large"
+                sp=".a-color-price"
+                mrp=".a-text-strike"
+                n=get2(driver1,naam)
+                s=get2(driver1,sp)
+                m=get2(driver1,mrp)
                 if m==0:
                     m=s
                 sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\

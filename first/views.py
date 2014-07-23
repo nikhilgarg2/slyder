@@ -33,8 +33,6 @@ def my_view(request):
           if  preset_form.is_valid():
             save_it=preset_form.save(commit=False)
             save_it.save()
-            #global d
-            #d=request.POST['website_id']
             return HttpResponseRedirect('http://127.0.0.1:8000/details/')
       if 'button5' in request.POST:    
         print "dimaag kharav"            
@@ -87,10 +85,12 @@ def add_details(request):
                 sellp=request.POST['sp']
                 crawl=request.POST['crawl_id']
                 category=request.POST['cat']
-                try3=final.objects.filter(crawl_id__contains=crawl)
+                try3=final.objects.filter(crawl_id__exact=request.POST['crawl_id'])
+                print request.POST['crawl_id']
+                print len(try3)
                 if len(try3)==0:
                  save_it=crawl_css.save(commit=False)
                  save_it.save()
                 scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category)
                 return HttpResponseRedirect('')    
-    return render_to_response('add.html',{'post':scro,'prod1':prod,'crawl':crawl_css},RequestContext(request))
+    return render(request,'add.html',{'post':scro,'prod1':prod,'crawl':crawl_css})

@@ -5,6 +5,13 @@ import re
 import fuzzywuzzy
 from fuzzywuzzy import fuzz
 
+def rec_val(a):
+    try:
+        y=float(a)
+        return float(y)
+    except Exception as d:
+        return 0
+
 
 def reconcile(category):
     sql="SELECT * FROM `item` WHERE `category_id`=%s"
@@ -34,8 +41,8 @@ def reconcile(category):
             id1=cursor.fetchone()
             m= re.sub(r'[^0-9^\.]','',fetch[e][3])
             s= re.sub(r'[^0-9^\.]','',fetch[e][4])
-            m= float(re.sub(r'^[^0-9]','',m))
-            s= float(re.sub(r'^[^0-9]','',s))
+            m= rec_val(re.sub(r'^[^0-9]','',m))
+            s= rec_val(re.sub(r'^[^0-9]','',s))
             sql="INSERT INTO `item_done`(`crawl_id`,`item_id`,`cat_id`,`website_item`,`name`,`mrp`,`site_price`)\
                 VALUES(%s,%s,%s,%s,%s,%s,%s)"
             values=(fetch[e][5],id1[0],category,fetch[e][1],x,m,s)
@@ -61,8 +68,8 @@ def reconcile(category):
             x= x=re.sub(r'[^a-z^A-Z^0-9^\ ^\.^\%]','',x)
             m= re.sub(r'[^0-9^\.]','',array2[e][3])
             s= re.sub(r'[^0-9^\.]','',array2[e][4])
-            m= float(re.sub(r'^[^0-9]','',m))
-            s= float(re.sub(r'^[^0-9]','',s))
+            m= rec_val(re.sub(r'^[^0-9]','',m))
+            s= rec_val(re.sub(r'^[^0-9]','',s))
             mrt=0
             t=False
             for j in range(len(array)):

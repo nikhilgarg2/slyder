@@ -6,6 +6,7 @@
 
     <body>
         <form method='POST' action='' align="Center">
+            {% csrf_token %}
             <div class="heading">Scroll Details</div>
             <span class="form">website : {{post.web_id}}</span>
             <span class="form">click : {{post.click}}</span>
@@ -15,12 +16,14 @@
         </form>
         
         <form method='POST' action='' align="center" style="margin:50px">
+            {% csrf_token %}
             <div class="heading"> Category Details</div>
             <span class="form"> Add a category : {{prod1.category}}</span>    
             <div style="margin:30px 30px 30px 30px"><input type="submit" name="button2" value="Add" class="button"></div>
         </form>
         
         <form method='POST' action='' align="center" style="margin: 50px">
+            {% csrf_token %}
             <div class="heading"> Product Css Arrtibute Details </div>
             <div class="form">
             <span class="form">Crawl ID : {{crawl.crawl_id}}</span>
@@ -38,3 +41,5 @@
                 <input type="submit" name="button3" value="Add" class="button">
             </div>        
         </form>
+    </body>
+</html>

@@ -39,10 +39,10 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
              driver.find_element_by_xpath(final[2]).click()
             time.sleep(5)
         except Exception as e:
-            print e
+            compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
             continue
       except Exception as d:
-        print d
+        compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
         break
      
     
