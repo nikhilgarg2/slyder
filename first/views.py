@@ -6,8 +6,8 @@ import MySQLdb
 #from .compile import compile1
 from .models import *
 from .scrol import scroll_first
-
-
+from .connect import *
+from fuzzywuzzy import fuzz
 
 def my_view(request):
     form = first_form()
@@ -52,8 +52,9 @@ def search123(request):
   searc=search1()
   if request.method=="POST":        
         searc=search1(request.POST or None)
-        if searc.is_valid():
-            if 'd_box' in request.POST:
+        if 'button7' in request.POST:
+            if 'd_box' in request.POST and request.POST['d_box']:
+               # print "true"
                 item_map=item.objects.raw('SELECT * FROM `item` WHERE `category_id`=%s', [request.POST['d_box']])
                 #print request.POST['d_box']
                 #print item_map
@@ -64,6 +65,22 @@ def search123(request):
                 price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id')
                 #print price_map
                 return render(request,'index.html',{'posts':price_map,'posts1':searc})
+            else:
+              #print "check"
+              x=request.POST['name']
+              #print x
+              sql="SELECT * FROM `item`"
+              cursor.execute(sql)
+              query=cursor.fetchall()
+              lis=[]
+              for e in range(len(query)):
+                    y=str(query[e][1])
+                    rat=fuzz.token_set_ratio(x,y)
+                    if rat >= 75:
+                        lis.append(query[e][0])
+              price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id')
+              return render(request,'index.html',{'posts':price_map,'posts1':searc})
+  
   return render_to_response('index.html',{'posts1':searc},RequestContext(request))
 
 
