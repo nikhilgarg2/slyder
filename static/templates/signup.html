@@ -35,9 +35,9 @@
                     <div class="textable">{{x.active}}</div>
                 </td>
                 <td>
-                    <form method='POST' action='' align="center">{% csrf_token %}
+                    <form method='POST' action='' align="center" >{% csrf_token %}
                             <input name="website_id" id="website_id" value="{{x.id}}" style="display: none"/>
-                            <input type="submit" name="button7" value="Crawl URLs" class="button">
+                            <input type="submit" name="button7" value="Crawl URLs" class="button" style="margin-top:16px">
                     </form>
     
                 </td>

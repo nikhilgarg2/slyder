@@ -1,45 +1,67 @@
 <html>
     <head>
+    <script type="text/javascript">
 
+    function showImage(){
+        document.getElementById('loadingImage').style.visibility='visible';
+    }
+
+    </script>
+    
         <link href="/static/mystyle.css" rel="stylesheet">
     </head>
 
     <body>
-        <form method='POST' action='' align="Center">
-            {% csrf_token %}
-            <div class="heading">Scroll Details</div>
-            <span class="form">website : {{post.web_id}}</span>
-            <span class="form">click : {{post.click}}</span>
-            <span class="form"> click id : {{post.click_id}} </span>
-            <span class="form">scrape ? : {{post.scrape_before_click}}</span>
-            <div style="margin:30px 30px 30px 30px"><input type="submit" name="button1" value="Add" class="button"></div>
-        </form>
+      
+      
+       <div style="margin: 10px;">
+        <div class="childDiv" style="margin-left:15%">
+            <div class="heading1" style="margin-bottom: 10px">Recent Crawl Url</div>
+            <div class="form1" style="color: red">{{yd.website_id}}</div>
+            <div class="form1" style="color:red">{{yd.crawl_id}}</div> 
         
-        <form method='POST' action='' align="center" style="margin:50px">
+         <form method='POST' action='' align="left">
             {% csrf_token %}
-            <div class="heading"> Category Details</div>
-            <span class="form"> Add a category : {{prod1.category}}</span>    
-            <div style="margin:30px 30px 30px 30px"><input type="submit" name="button2" value="Add" class="button"></div>
-        </form>
+            <div class="heading1">Scroll Details</div>
+            <div class="form1">website : {{post.web_id}}</div>
+            <div class="form1">click : {{post.click}}</div>
+            <div class="form1"> click id : {{post.click_id}} </div>
+            <div class="form1">scrape ? : {{post.scrape_before_click}}</div>
+            <div style="margin:30px"><input type="submit" name="button1" value="Add" class="button"></div>
+         </form>
         
-        <form method='POST' action='' align="center" style="margin: 50px">
+         <form method='POST' action='' align="left">
             {% csrf_token %}
-            <div class="heading"> Product Css Arrtibute Details </div>
-            <div class="form">
-            <span class="form">Crawl ID : {{crawl.crawl_id}}</span>
-            <span class="form">Category: {{crawl.cat}}</span>
-            <span class="form">Parent Selector:{{crawl.parent_css}}</span>
-            <span class="form">Product ID:{{crawl.prod_id}}</span>       
-            </div>
-            <div class="form">             
-            <span class="form">Product ID Attribute:{{crawl.prod_attribute}}</span>   
-            <span class="form">Name:{{crawl.name}}</span>
-            <span class="form">MRP:{{crawl.mrp}}</span>
-            <span class="form">Selling Price:{{crawl.sp}}</span>
-            </div>
+            <div class="heading1"> Category Details</div>
+            <div class="form1"> Add a category : {{prod1.category}}</div>    
+            <div style="margin:30px"><input type="submit" name="button2" value="Add" class="button"></div>
+         </form>
+        </div>
+        
+        <div class="childDiv">
+         <form method='POST' action='' align="left">
+            {% csrf_token %}
+            <div class="heading1"> Product Css Arrtibute Details </div>
             <div>
-                <input type="submit" name="button3" value="Add" class="button">
+            <div class="form1">Crawl ID : {{crawl.crawl_id}}</div>
+            <div class="form1">Category: {{crawl.cat}}</div>
+            <div class="form1">Parent Selector:{{crawl.parent_css}}</div>
+            <div class="form1">Product ID:{{crawl.prod_id}}</div>             
+            <div class="form1">Product ID Attribute:{{crawl.prod_attribute}}</div>   
+            <div class="form1">Name:{{crawl.name}}</div>
+            <div class="form1">MRP:{{crawl.mrp}}</div>
+            <div class="form1">Selling Price:{{crawl.sp}}</div>
+            </div>
+            
+            <div style="margin:30px">
+                <input type="submit" name="button3" value="Add" class="button" onclick="showImage();" >
             </div>        
-        </form>
+         </form>
+         <img id="loadingImage" src="{{ MEDIA_URL }}wait.gif" align="middle" style="visibility:hidden" height="75" width="225" />
+        </div>
+       </div>
+      <div style="margin: 30px 575px 20px 575px">
+       
+      </div>
     </body>
 </html>

@@ -1,6 +1,12 @@
 <html>
     <head>
+         <script type="text/javascript">
 
+    function showImage(){
+        document.getElementById('loadingImage').style.visibility='visible';
+    }
+
+    </script>
         <link href="/static/mystyle.css" rel="stylesheet">
     </head>
 
@@ -11,8 +17,8 @@
         <thead>
             <tr color="grey" size="8">
 
-              <th>id</th>
-              <th>crawl_url</th>
+              <th>ID</th>
+              <th>Crawl Url</th>
     
               <th>Crawl ID</th>
             </tr>
@@ -26,7 +32,7 @@
                 </td>
 
                 <td>
-                    <div class="textable" style="text-align:left">{{x.crawl_url}}</div>
+                    <div class="textable" style="text-align:left;width: 700px;word-break: break-all;">{{x.crawl_url}}</div>
                 </td>
 
                 <td>
@@ -40,7 +46,7 @@
 
     
     <div>
-        <div class="childDiv">
+        <div class="childDiv" style="margin-left: 10%">
             <div class="heading"> ADD NEW</div>
 
             <form method='POST' action='' align="center">{% csrf_token %}
@@ -66,11 +72,13 @@
 
             <form method='POST' action='' align="center">{% csrf_token %}
                 <div class="form">
-                    <label> CRAWL ID:</label> <input type="text" name="crawlid" > 
+                    <label> ID(Above Table):</label> <input type="text" name="crawlid" > 
                 </div>
-                <input class="button" type='submit' name="button5" value="crawl">
-            </form>
-        </div>
-    </div>  
+                <input class="button" type='submit' name="button5" value="crawl" onclick="showImage();" />
+              </form>
+        
+            <img id="loadingImage" src="{{ MEDIA_URL }}wait.gif" align="middle" style="visibility:hidden" height="75" width="225" />
+          </div>  
+    </div>
     </body>
 </html> 

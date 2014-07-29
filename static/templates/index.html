@@ -58,13 +58,13 @@
        
        <td>
         {% for item in country.list %}
-        <div style="margin: 5px;">{{item.mrp}}</div>
+        <div style="margin: 5px; color: red">{{item.mrp}}</div>
         {% endfor %}    
     </td>
     
     <td>
         {% for item in country.list %}
-        <div style="margin: 5px;">{{item.site_price}}</div>
+        <div style="margin: 5px;font:bold">{{item.site_price}}</div>
         {% endfor %}    
     </td>
     

@@ -12,9 +12,10 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
     sql1="SELECT * FROM `crawl_url` WHERE `id`='%s'" % crawl
     cursor.execute(sql1)
     trying=cursor.fetchone()
-    chromedriver = "/usr/bin/chromedriver"
-    driver = webdriver.Chrome(chromedriver)
-    time.time()
+    #chromedriver = "/usr/bin/chromedriver"
+    #driver = webdriver.Chrome(chromedriver)
+    #time.time()
+    driver=webdriver.Firefox()
     driver.get(trying[2])
     sql1="SELECT * FROM `scroll` WHERE `web_id`='%d'" %(int(trying[1]))
     cursor.execute(sql1)

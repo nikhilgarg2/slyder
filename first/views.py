@@ -9,6 +9,7 @@ from .scrol import scroll_first
 from .connect import *
 from fuzzywuzzy import fuzz
 
+warning=0
 def my_view(request):
     form = first_form()
     preset_form = websiteform()
@@ -33,7 +34,10 @@ def my_view(request):
           if  preset_form.is_valid():
             save_it=preset_form.save(commit=False)
             save_it.save()
-            return HttpResponseRedirect('http://127.0.0.1:8000/details/')
+            global warning
+            warning=request.POST['crawl_id']
+            #print warning
+            return HttpResponseRedirect('/details/')
       if 'button5' in request.POST:    
         x=request.POST['crawlid']
         item_try=final.objects.filter(crawl_id__exact=x)
@@ -53,7 +57,7 @@ def search123(request):
   if request.method=="POST":        
         searc=search1(request.POST or None)
         if 'button7' in request.POST:
-            if 'd_box' in request.POST and request.POST['d_box']:
+            if 'd_box' in request.POST and request.POST['d_box'] and not request.POST['name']:
                # print "true"
                 item_map=item.objects.raw('SELECT * FROM `item` WHERE `category_id`=%s', [request.POST['d_box']])
                 #print request.POST['d_box']
@@ -87,6 +91,7 @@ def search123(request):
 def add_details(request):
     crawl_css=crawl_url_attribute_css_sel1()
     prod=prodid1()
+    x=crawl_url.objects.get(crawl_id__exact=warning)
     scro=scroll1()
     if request.method=="POST":
         if 'button1' in request.POST:
@@ -113,11 +118,11 @@ def add_details(request):
                 crawl=request.POST['crawl_id']
                 category=request.POST['cat']
                 try3=final.objects.filter(crawl_id__exact=request.POST['crawl_id'])
-                print request.POST['crawl_id']
-                print len(try3)
+                #print request.POST['crawl_id']
+                #print len(try3)
                 if len(try3)==0:
                  save_it=crawl_css.save(commit=False)
                  save_it.save()
                 scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category)
                 return HttpResponseRedirect('')    
-    return render(request,'add.html',{'post':scro,'prod1':prod,'crawl':crawl_css})
+    return render(request,'add.html',{'yd':x,'post':scro,'prod1':prod,'crawl':crawl_css})

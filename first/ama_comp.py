@@ -49,9 +49,10 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
             cursor.execute(sql1,values)
             db.commit()
     
-    chromedriver = "/usr/bin/chromedriver"
-    driver1 = webdriver.Chrome(chromedriver)
-    time.time()
+    #chromedriver = "/usr/bin/chromedriver"
+    #driver1 = webdriver.Chrome(chromedriver)
+    #time.time()
+    driver=webdriver.Firefox()
     for z in links:
         lk=z.get_attribute('href')
         driver1.get(lk)
