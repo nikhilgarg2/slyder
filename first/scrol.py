@@ -20,7 +20,7 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
     sql1="SELECT * FROM `scroll` WHERE `web_id`='%d'" %(int(trying[1]))
     cursor.execute(sql1)
     final=cursor.fetchone()
-    print "done"
+    #print "done"
     
     if final[1]==False:
      for i in range(100):
@@ -29,28 +29,39 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
      compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)      
     
     elif final[1] == True and final[3]==True:
+     quer="SELECT `address` FROM `website` WHERE `id`=%s"
+     vai=(final[4])
+     cursor.execute(quer,vai)
+     name=cursor.fetchone()
      while True:
       try:
         driver.find_element_by_xpath(final[2])  #
         try:
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(3)
-            compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
-            print 'final[2]'
+            if 'amazon' in name[0]:
+                compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
+            else:
+                compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
             time.sleep(5)
             if driver.find_element_by_xpath(final[2]).is_enabled():
              driver.find_element_by_xpath(final[2]).click()
             time.sleep(5)
         except Exception as e:
-            compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
+            if 'amazon' in name[0]:
+                compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
+            else:
+                compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
             continue
       except Exception as d:
-        compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
+        if 'amazon' in name[0]:
+                compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
+        else:
+                compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
         break
      
     
     elif final[1]==True and final[3]==False:
-        
         while True:
             time.sleep(8)
             try: 
@@ -63,7 +74,7 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
                       driver.find_element_by_xpath(final[2]).click()
                     
                 except Exception as e:
-                    print e
+                    #print e
                     continue
             except Exception as d:
                  break
