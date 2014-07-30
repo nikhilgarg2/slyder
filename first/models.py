@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.encoding import smart_unicode      
 from django import forms
+from .dumpi import dump2
 
 class website(models.Model):
     class Meta:
@@ -106,4 +107,14 @@ class search(models.Model):
         db_table='search'
     d_box=models.ForeignKey(cat,db_column='cat',null=True, blank=True)
     name=models.CharField(max_length=50,null=True, blank=True)
-    
+
+class item_done_fin(models.Model):
+    class Meta:
+        db_table='item_done_fin'
+    crawl_id=models.CharField(max_length=10)
+    item_id=models.CharField(max_length=10)
+    cat_id=models.CharField(max_length=10)
+    website_item=models.CharField(max_length=45)
+    name=models.CharField(max_length=220)
+    mrp=models.DecimalField(max_digits=10,decimal_places=2)
+    site_price=models.DecimalField(max_digits=10, decimal_places=2)    

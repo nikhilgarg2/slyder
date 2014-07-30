@@ -6,6 +6,7 @@ from .connect import *
 from .dump import compile2
 from .reconcile import reconcile
 from .ama_comp import compile3
+from .dumpi import dump2
 
 def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
     
@@ -26,6 +27,7 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
      for i in range(100):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") # scroll to bottom of page
         time.sleep(5)
+     dump2(crawl)
      compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)      
     
     elif final[1] == True and final[3]==True:
@@ -33,6 +35,7 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
      vai=(final[4])
      cursor.execute(quer,vai)
      name=cursor.fetchone()
+     dump2(crawl)
      while True:
       try:
         driver.find_element_by_xpath(final[2])  #
@@ -78,7 +81,7 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
                     continue
             except Exception as d:
                  break
-        
+        dump2(crawl)
         compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category)
         
     driver.close()

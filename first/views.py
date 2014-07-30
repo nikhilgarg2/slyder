@@ -82,7 +82,7 @@ def search123(request):
                     rat=fuzz.token_set_ratio(x,y)
                     if rat >= 75:
                         lis.append(query[e][0])
-              price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id')
+              price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id','site_price')
               return render(request,'index.html',{'posts':price_map,'posts1':searc})
   
   return render_to_response('index.html',{'posts1':searc},RequestContext(request))

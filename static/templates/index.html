@@ -31,7 +31,7 @@
     <thead>
             <tr color="grey" size="8">
             
-            <th>Item Codes</th>
+            
             <th>Name</th>
             <th>MRP</th>
             <th>Site price</th>
@@ -44,38 +44,50 @@
 
 {% for country in post_list %}
     
-    <tr>
-    <td>{{ country.grouper }}</td>
-    <td>
-        {% for item in country.list %}
-        <li  padding-left: 1em;
-  text-indent: -1em;>
-        <div style="margin: 5px; text-align: left"> {{item.name}}</div>
-        </li>
-        {% endfor %}    
-    </td>
-       
-       
-       <td>
-        {% for item in country.list %}
-        <div style="margin: 5px; color: red">{{item.mrp}}</div>
-        {% endfor %}    
-    </td>
+        <tr style="background-color: #DDD;">
+            <td colspan="4"> Item Code : {{ country.grouper }}</td>
+        </tr> 
+        
+        {% regroup country.list|dictsort:"site_price" by site_price as country2 %}   
+            
+            {% for country1 in country2 %}
+                  
+           
+                {% for item in country1.list %}
+                <tr>
+                
+                            
+                    <td>
+                            
+                            <div style="margin: 5px; text-align: left"> {{item.name}}</div>
+                            
+                    </td>
+            
+            
+                    <td>
+                            <div style="margin: 5px;">{{item.mrp}}</div>
+                    </td>
+        
+        
+                    <td>
+                            <div style="margin: 5px;font:bold">{{item.site_price}}</div>
+                    </td>
+        
+        
+                    <td>
+                            <div style="margin: 5px;">{{item.crawl_id}}</div>
+            
+                    </td>   
     
-    <td>
-        {% for item in country.list %}
-        <div style="margin: 5px;font:bold">{{item.site_price}}</div>
-        {% endfor %}    
-    </td>
+            
+                </tr>  
+                
+                {% endfor %}
+      
+            
+            {% endfor %}   
+ 
     
-    <td>
-        {% for item in country.list %}
-        <div style="margin: 5px;">{{item.crawl_id}}</div>
-        {% endfor %}    
-    </td>
-    
-    
-    </tr>
 {% endfor %}
 
      </tbody>
