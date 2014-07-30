@@ -118,3 +118,12 @@ class item_done_fin(models.Model):
     name=models.CharField(max_length=220)
     mrp=models.DecimalField(max_digits=10,decimal_places=2)
     site_price=models.DecimalField(max_digits=10, decimal_places=2)    
+
+class log_id(models.Model):
+    class Meta:
+        db_table='log_id'
+    name=models.CharField(max_length=45)
+    password=models.CharField(max_length=45)
+    
+    def __unicode__(self):
+        return smart_unicode(self.name)

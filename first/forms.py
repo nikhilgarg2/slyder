@@ -43,3 +43,9 @@ class search1(forms.ModelForm):
         model=search
         exclude=[]
 
+class login(forms.ModelForm):
+    class Meta:
+        model=log_id
+        exclude=[]
+    
+    #code

@@ -8,6 +8,8 @@ from .models import *
 from .scrol import scroll_first
 from .connect import *
 from fuzzywuzzy import fuzz
+import itertools
+
 
 warning=0
 def my_view(request):
@@ -53,6 +55,8 @@ def my_view(request):
 
 
 def search123(request):
+  global itertool
+  itertool=itertools.count()
   searc=search1()
   if request.method=="POST":        
         searc=search1(request.POST or None)
@@ -68,7 +72,7 @@ def search123(request):
                 #print lis
                 price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id')
                 #print price_map
-                return render(request,'index.html',{'posts':price_map,'posts1':searc})
+                return render(request,'index.html',{'posts':price_map,'posts1':searc,'itertools':itertool})
             else:
               #print "check"
               x=request.POST['name']
@@ -83,7 +87,7 @@ def search123(request):
                     if rat >= 75:
                         lis.append(query[e][0])
               price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id','site_price')
-              return render(request,'index.html',{'posts':price_map,'posts1':searc})
+              return render(request,'index.html',{'posts':price_map,'posts1':searc,'itertools':itertool})
   
   return render_to_response('index.html',{'posts1':searc},RequestContext(request))
 
@@ -126,3 +130,16 @@ def add_details(request):
                 scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category)
                 return HttpResponseRedirect('')    
     return render(request,'add.html',{'yd':x,'post':scro,'prod1':prod,'crawl':crawl_css})
+
+def login(request):
+    log=login()
+    if request.method=="POST":
+        if 'login' in request.POST:
+            log=login(request.POST or None)
+            sql="SELECT `id` FROM `log_id` WHERE `name`=%s and `password`=%s"
+            values(request.POST['name'], request.POST['password'])
+            cursor.execute(sql,values)
+            final=cursor.fetchall()
+            if len(final)==0:
+                return HttpResponseRedirect('/blog/')
+    return render(request,'login.html',{'log':log_in})        

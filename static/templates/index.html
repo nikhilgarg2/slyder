@@ -41,24 +41,29 @@
           </thead>        
      <tbody>           
  
-
+ 
 {% for country in post_list %}
     
         <tr style="background-color: #DDD;">
             <td colspan="4"> Item Code : {{ country.grouper }}</td>
         </tr> 
         
+        
+        
         {% regroup country.list|dictsort:"site_price" by site_price as country2 %}   
             
             {% for country1 in country2 %}
-                  
-           
+   
+                                   
                 {% for item in country1.list %}
-                <tr>
                 
-                            
+                       {% if "healthkart"|slugify in item.crawl_id|slugify %}
+                
+                            {% if forloop.counter == 1 %}
+                    <tr style="color: green">
+                                     
                     <td>
-                            
+                      
                             <div style="margin: 5px; text-align: left"> {{item.name}}</div>
                             
                     </td>
@@ -81,6 +86,102 @@
     
             
                 </tr>  
+                            
+                
+                
+                {% elif forloop.counter == country.list|length %}
+                <tr style="color: red">
+                                      
+                    <td>
+                      
+                            <div style="margin: 5px; text-align: left"> {{item.name}}</div>
+                            
+                    </td>
+            
+            
+                    <td>
+                            <div style="margin: 5px;">{{item.mrp}}</div>
+                    </td>
+        
+        
+                    <td>
+                            <div style="margin: 5px;font:bold">{{item.site_price}}</div>
+                    </td>
+        
+        
+                    <td>
+                            <div style="margin: 5px;">{{item.crawl_id}}</div>
+            
+                    </td>   
+    
+            
+                </tr>  
+                
+                
+                {% elif forloop.counter != 1 and forloop.counter != country.list|length %}
+                <tr style="color: orange">
+                                     
+                    <td>
+                      
+                            <div style="margin: 5px; text-align: left"> {{item.name}}</div>
+                            
+                    </td>
+            
+            
+                    <td>
+                            <div style="margin: 5px;">{{item.mrp}}</div>
+                    </td>
+        
+        
+                    <td>
+                            <div style="margin: 5px;font:bold">{{item.site_price}}</div>
+                    </td>
+        
+        
+                    <td>
+                            <div style="margin: 5px;">{{item.crawl_id}}</div>
+            
+                    </td>   
+    
+            
+                </tr>  
+                {% endif %}
+                
+                
+                
+            {% else %}
+                
+                 <tr >
+                                      
+                    <td>
+                      
+                            <div style="margin: 5px; text-align: left"> {{item.name}}</div>
+                            
+                    </td>
+            
+            
+                    <td>
+                            <div style="margin: 5px;">{{item.mrp}}</div>
+                    </td>
+        
+        
+                    <td>
+                            <div style="margin: 5px;font:bold">{{item.site_price}}</div>
+                    </td>
+        
+        
+                    <td>
+                            <div style="margin: 5px;">{{item.crawl_id}}</div>
+            
+                    </td>   
+    
+            
+                </tr>  
+                {% endif %}
+            
+                
+                
+                
                 
                 {% endfor %}
       
