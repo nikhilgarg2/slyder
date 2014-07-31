@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <link href="/static/mystyle.css" rel="stylesheet">
+    </head>
+    
+    <body>
+    
+    <div class="heading" style="font-size: 40"> SLYDER</div>
+            
+         <div class="heading"> Login</div>   
+            <form method='POST' action='' align="center">{% csrf_token %}
+                <div class="form">
+                    USER NAME:{{log.name}}
+                </div>
+                <div class="form">
+                    PASSWORD <label for ="log.password"><input type="password" name="password"></label>
+                </div>
+                <input class="button" type='submit' name="login_but" value="Login">
+            
+            </form>
+    
+    </body>
+</html>

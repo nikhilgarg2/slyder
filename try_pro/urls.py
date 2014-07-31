@@ -7,12 +7,13 @@ from django.contrib import admin
 admin.autodiscover()
 from django.conf import settings
 from django.conf.urls.static import static
+from first.views import login1
 
 urlpatterns = patterns('',
     # Examples:
      #url(r'^try_p/', 'try.views.home', name='my_view'),
      url(r'^blog/', my_view),
-    #url(r'^blog1/', home),
+    url(r'^', login1),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^first/', search123),
     url(r'^details/', add_details),

@@ -49,6 +49,17 @@ def my_view(request):
         scroll_first(z.parent_css,z.prod_id,z.prod_attribute,z.name,z.mrp,z.sp,x,cat_query[0].id)
         #print z.cat
         return HttpResponseRedirect('')
+      if 'crawl_all' in request.POST:
+        sql="SELECT * FROM `crawl_url`"
+        cursor.execute(sql)
+        lis=cursor.fetchall()
+        for e in range(len(lis)):
+            x=lis[e][0]
+            item_try=final.objects.filter(crawl_id__exact=x)
+            z=item_try[0]
+            cat_query=cat.objects.filter(category__exact=z.cat)
+            scroll_first(z.parent_css,z.prod_id,z.prod_attribute,z.name,z.mrp,z.sp,x,cat_query[0].id)
+        return HttpResponseRedirect('')
     return render_to_response('signup.html',{'form': first_form,'posts':website_map},RequestContext(request))  
      
 
@@ -131,15 +142,16 @@ def add_details(request):
                 return HttpResponseRedirect('')    
     return render(request,'add.html',{'yd':x,'post':scro,'prod1':prod,'crawl':crawl_css})
 
-def login(request):
+def login1(request):
     log=login()
     if request.method=="POST":
-        if 'login' in request.POST:
+        if 'login_but' in request.POST:
             log=login(request.POST or None)
+            password = request.POST.get('password', False);
             sql="SELECT `id` FROM `log_id` WHERE `name`=%s and `password`=%s"
-            values(request.POST['name'], request.POST['password'])
+            values=(request.POST['name'], password)
             cursor.execute(sql,values)
             final=cursor.fetchall()
-            if len(final)==0:
+            if len(final)!=0:
                 return HttpResponseRedirect('/blog/')
-    return render(request,'login.html',{'log':log_in})        
+    return render(request,'login.html',{'log':log})        

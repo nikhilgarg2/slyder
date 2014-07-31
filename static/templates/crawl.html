@@ -61,6 +61,7 @@
                     <label>CRAWL ID: </label>{{form1.crawl_id}}
                 </div>
                 <input class="button" type='submit' name="button4" value="Add">
+            
             </form>
         </div>
  
@@ -74,11 +75,15 @@
                 <div class="form">
                     <label> ID(Above Table):</label> <input type="text" name="crawlid" > 
                 </div>
-                <input class="button" type='submit' name="button5" value="crawl" onclick="showImage();" />
-              </form>
-        
-            <img id="loadingImage" src="{{ MEDIA_URL }}wait.gif" align="middle" style="visibility:hidden" height="75" width="225" />
-          </div>  
+                <input class="button" type='submit' name="button5" value="crawl" />
+                <div style="margin-top:25px">
+                 <input class="button" type='submit' name="crawl_all" value="Crawl All" />
+                </div>  
+                
+               
+                  </form>
+         
+    </div>
     </div>
     </body>
 </html> 
