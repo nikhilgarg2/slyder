@@ -59,7 +59,7 @@ WSGI_APPLICATION = 'try_pro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
-        'NAME': 'dtry',
+        'NAME': 'slyder',
     	'USER': 'root',
 	'PASSWORD': 'dellxps123',
  	'OPTIONS':{

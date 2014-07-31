@@ -10,8 +10,8 @@ from .connect import *
 from fuzzywuzzy import fuzz
 import itertools
 
-
 warning=0
+
 def my_view(request):
     form = first_form()
     preset_form = websiteform()
@@ -21,6 +21,7 @@ def my_view(request):
     #scro=scroll1()
     searc=search1()
     website_map=website.objects.raw('SELECT * FROM `website`')
+    global warning
     if request.method=="POST":
       if 'button3' in request.POST:
        form = first_form(request.POST or None)
@@ -36,19 +37,18 @@ def my_view(request):
           if  preset_form.is_valid():
             save_it=preset_form.save(commit=False)
             save_it.save()
-            global warning
+            #global warning
             warning=request.POST['crawl_id']
-            #print warning
             return HttpResponseRedirect('/details/')
+      
       if 'button5' in request.POST:    
         x=request.POST['crawlid']
         item_try=final.objects.filter(crawl_id__exact=x)
         z=item_try[0]
         cat_query=cat.objects.filter(category__exact=z.cat)
-        #print cat_query[0].id
         scroll_first(z.parent_css,z.prod_id,z.prod_attribute,z.name,z.mrp,z.sp,x,cat_query[0].id)
-        #print z.cat
         return HttpResponseRedirect('')
+      
       if 'crawl_all' in request.POST:
         sql="SELECT * FROM `crawl_url`"
         cursor.execute(sql)
@@ -60,6 +60,13 @@ def my_view(request):
             cat_query=cat.objects.filter(category__exact=z.cat)
             scroll_first(z.parent_css,z.prod_id,z.prod_attribute,z.name,z.mrp,z.sp,x,cat_query[0].id)
         return HttpResponseRedirect('')
+      
+      if 'crawl_id1' in request.POST:
+            #global warning
+            warning=request.POST['crawl_id1']
+            #print warning
+            return HttpResponseRedirect('/details/')
+    
     return render_to_response('signup.html',{'form': first_form,'posts':website_map},RequestContext(request))  
      
 
@@ -73,21 +80,15 @@ def search123(request):
         searc=search1(request.POST or None)
         if 'button7' in request.POST:
             if 'd_box' in request.POST and request.POST['d_box'] and not request.POST['name']:
-               # print "true"
                 item_map=item.objects.raw('SELECT * FROM `item` WHERE `category_id`=%s', [request.POST['d_box']])
-                #print request.POST['d_box']
-                #print item_map
                 lis=[]
                 for e in (item_map):
                     lis.append(e.id)
-                #print lis
                 price_map=item_done.objects.filter(item_id__in=lis).order_by('item_id')
-                #print price_map
                 return render(request,'index.html',{'posts':price_map,'posts1':searc,'itertools':itertool})
+            
             else:
-              #print "check"
               x=request.POST['name']
-              #print x
               sql="SELECT * FROM `item`"
               cursor.execute(sql)
               query=cursor.fetchall()
@@ -106,6 +107,7 @@ def search123(request):
 def add_details(request):
     crawl_css=crawl_url_attribute_css_sel1()
     prod=prodid1()
+    #print warning
     x=crawl_url.objects.get(crawl_id__exact=warning)
     scro=scroll1()
     if request.method=="POST":

@@ -36,7 +36,9 @@
                 </td>
 
                 <td>
-                    <div class="textable">{{x.crawl_id}}</div>
+                     <form method='POST' action='' align="center">{% csrf_token %}
+                    <input type="submit" class="button" name="crawl_id1" id="crawl_id1" value="{{x.crawl_id}}" />
+                     </form>
                 </td>
                 
             </tr>

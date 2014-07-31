@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     # Examples:
      #url(r'^try_p/', 'try.views.home', name='my_view'),
      url(r'^blog/', my_view),
-    url(r'^', login1),
+    url(r'^$', login1),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^first/', search123),
     url(r'^details/', add_details),
