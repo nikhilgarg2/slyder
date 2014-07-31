@@ -12,11 +12,11 @@ from first.views import login1
 urlpatterns = patterns('',
     # Examples:
      #url(r'^try_p/', 'try.views.home', name='my_view'),
-     url(r'^home/', my_view),
+     url(r'^blog/', my_view),
     url(r'^$', login1),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^search/', search123),
-    url(r'^crawl/', add_details),
+    url(r'^first/', search123),
+    url(r'^details/', add_details),
     
 
 )

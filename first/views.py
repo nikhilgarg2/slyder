@@ -12,6 +12,8 @@ import itertools
 
 warning=0
 
+
+
 def my_view(request):
     form = first_form()
     preset_form = websiteform()
@@ -39,7 +41,7 @@ def my_view(request):
             save_it.save()
             #global warning
             warning=request.POST['crawl_id']
-            return HttpResponseRedirect('/details/')
+            return HttpResponseRedirect('/crawl/')
       
       if 'button5' in request.POST:    
         x=request.POST['crawlid']
@@ -62,10 +64,10 @@ def my_view(request):
         return HttpResponseRedirect('')
       
       if 'crawl_id1' in request.POST:
-            #global warning
+            
             warning=request.POST['crawl_id1']
-            #print warning
-            return HttpResponseRedirect('/details/')
+            
+            return HttpResponseRedirect('/crawl/')
     
     return render_to_response('signup.html',{'form': first_form,'posts':website_map},RequestContext(request))  
      
@@ -102,6 +104,8 @@ def search123(request):
               return render(request,'index.html',{'posts':price_map,'posts1':searc,'itertools':itertool})
   
   return render_to_response('index.html',{'posts1':searc},RequestContext(request))
+
+
 
 
 def add_details(request):
@@ -144,6 +148,9 @@ def add_details(request):
                 return HttpResponseRedirect('')    
     return render(request,'add.html',{'yd':x,'post':scro,'prod1':prod,'crawl':crawl_css})
 
+
+
+
 def login1(request):
     log=login()
     if request.method=="POST":
@@ -155,5 +162,5 @@ def login1(request):
             cursor.execute(sql,values)
             final=cursor.fetchall()
             if len(final)!=0:
-                return HttpResponseRedirect('/blog/')
+                return HttpResponseRedirect('/home/')
     return render(request,'login.html',{'log':log})        
