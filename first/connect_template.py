@@ -4,8 +4,8 @@ create a file named connect.py in the first folder. The template is given below.
 details accordingly
 '''
 
-'''import MySQLdb
+import MySQLdb
 
-db=MySQLdb.connect("localhost","USER","PASSWORD","DATABASE")
+db=MySQLdb.connect("localhost","root","dellxps123","slyder")
 cursor=db.cursor()
-'''
+

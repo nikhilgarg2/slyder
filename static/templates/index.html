@@ -55,9 +55,9 @@
             {% for country1 in country2 %}
                  
                  {% for item in country1.list %}
-                    {% if "healthkart"|slugify in item.crawl_id|slugify and forloop.counter == 1 %}
+                    {% if "healthkart"|slugify in item.crawl_id|slugify %}
                     
-                        <tr style="color: green">                     
+                        <tr style="color: blue">                     
                             <td>
                                 <div style="margin: 5px; text-align: left"> {{item.name}}</div>
                              </td>
@@ -75,44 +75,7 @@
                              </td>               
                         </tr>                                       
                 
-                    {% elif "healthkart"|slugify in item.crawl_id|slugify and forloop.counter == country.list|length %}
-                        <tr style="color: red">
-                            <td>
-                                <div style="margin: 5px; text-align: left"> {{item.name}}</div>    
-                            </td>          
-                
-                            <td>
-                                <div style="margin: 5px;">{{item.mrp}}</div>
-                            </td>       
-                
-                            <td>
-                                <div style="margin: 5px;font:bold">{{item.site_price}}</div>
-                            </td>        
-        
-                            <td>
-                                <div style="margin: 5px;">{{item.crawl_id}}</div>
-                            </td>   
-                        </tr>  
-                
-                
-                    {% elif "healthkart"|slugify in item.crawl_id|slugify and forloop.counter != 1 and forloop.counter != country.list|length %}
-                        <tr style="color: orange">
-                            <td>
-                                <div style="margin: 5px; text-align: left"> {{item.name}}</div>
-                            </td>
-            
-                            <td>
-                                <div style="margin: 5px;">{{item.mrp}}</div>
-                            </td>
-        
-                            <td>
-                                <div style="margin: 5px;font:bold">{{item.site_price}}</div>
-                            </td>
-        
-                            <td>
-                                <div style="margin: 5px;">{{item.crawl_id}}</div>
-                            </td>   
-                        </tr>  
+                   
                 
                     {% else %}
                          <tr >

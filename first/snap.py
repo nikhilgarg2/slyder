@@ -6,7 +6,7 @@ from .connect import *
 
 def get_name(i):
 	try:
-		x=i.find_element_by_css_selector('.product-title').text
+		x=i.find_element_by_css_selector('.product-image').get_attribute('alt')
 		return x
 	except Exception as d:
 		return "N/A"

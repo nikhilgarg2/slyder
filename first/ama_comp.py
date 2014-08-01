@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 
 def get1(r,prod,proda):
     try:
-        j=r.find_element_by_css_selector(prod).get_attribute(proda)
+        j=r.get_attribute('name')
         return j
     except Exception as d:
         return "N/A"
@@ -49,9 +49,7 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
             cursor.execute(sql1,values)
             db.commit()
     
-    #chromedriver = "/usr/bin/chromedriver"
-    #driver1 = webdriver.Chrome(chromedriver)
-    #time.time()
+
     driver1=webdriver.Firefox()
     for z in links:
         lk=z.get_attribute('href')

@@ -145,7 +145,7 @@ def add_details(request):
                  save_it=crawl_css.save(commit=False)
                  save_it.save()
                 scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category)
-                return HttpResponseRedirect('')    
+                return HttpResponseRedirect('/home/')    
     return render(request,'add.html',{'yd':x,'post':scro,'prod1':prod,'crawl':crawl_css,'exist1':exist})
 
 
