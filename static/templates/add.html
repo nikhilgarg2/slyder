@@ -23,7 +23,13 @@
          <form method='POST' action='' align="left">
             {% csrf_token %}
             <div class="heading1">Scroll Details</div>
-            <div class="form1">Existing Details : {{existing1.web_id}} </div>
+            <div class="form1">Existing Details : <select>
+                
+                {% for e in exist1 %}
+               <option> {{e.web_id}}</option>
+            {% endfor %}
+                
+            </select> </div>
             <div class="form1">website : {{post.web_id}}</div>
             <div class="form1">click : {{post.click}}</div>
             <div class="form1"> click id : {{post.click_id}} </div>

@@ -3,7 +3,6 @@ from django.http import HttpResponseRedirect
 from .forms import *
 from selenium import webdriver
 import MySQLdb
-#from .compile import compile1
 from .models import *
 from .scrol import scroll_first
 from .connect import *
@@ -17,10 +16,8 @@ warning=0
 def my_view(request):
     form = first_form()
     preset_form = websiteform()
-    #crawl_attri = crawl_attribute1()
     crawl_css=crawl_url_attribute_css_sel1()
     prod=prodid1()
-    #scro=scroll1()
     searc=search1()
     website_map=website.objects.raw('SELECT * FROM `website`')
     global warning
@@ -39,7 +36,6 @@ def my_view(request):
           if  preset_form.is_valid():
             save_it=preset_form.save(commit=False)
             save_it.save()
-            #global warning
             warning=request.POST['crawl_id']
             return HttpResponseRedirect('/crawl/')
       
@@ -64,10 +60,10 @@ def my_view(request):
         return HttpResponseRedirect('')
       
       if 'crawl_id1' in request.POST:
-            
             warning=request.POST['crawl_id1']
-            
             return HttpResponseRedirect('/crawl/')
+      if 'search' in request.POST:
+            return HttpResponseRedirect('/search/')
     
     return render_to_response('signup.html',{'form': first_form,'posts':website_map},RequestContext(request))  
      
@@ -111,9 +107,15 @@ def search123(request):
 def add_details(request):
     crawl_css=crawl_url_attribute_css_sel1()
     prod=prodid1()
-    #print warning
     x=crawl_url.objects.get(crawl_id__exact=warning)
     scro=scroll1()
+    sql="SELECT * FROM `scroll`"
+    cursor.execute(sql)
+    lik=cursor.fetchall()
+    web_ids=[]
+    for e in range(len(lik)):
+        web_ids.append(lik[e][4])
+    exist=scroll.objects.filter(web_id__in=web_ids)
     if request.method=="POST":
         if 'button1' in request.POST:
             scro=scroll1(request.POST or None)
@@ -139,14 +141,12 @@ def add_details(request):
                 crawl=request.POST['crawl_id']
                 category=request.POST['cat']
                 try3=final.objects.filter(crawl_id__exact=request.POST['crawl_id'])
-                #print request.POST['crawl_id']
-                #print len(try3)
                 if len(try3)==0:
                  save_it=crawl_css.save(commit=False)
                  save_it.save()
                 scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category)
                 return HttpResponseRedirect('')    
-    return render(request,'add.html',{'yd':x,'post':scro,'prod1':prod,'crawl':crawl_css})
+    return render(request,'add.html',{'yd':x,'post':scro,'prod1':prod,'crawl':crawl_css,'exist1':exist})
 
 
 
@@ -156,11 +156,16 @@ def login1(request):
     if request.method=="POST":
         if 'login_but' in request.POST:
             log=login(request.POST or None)
-            password = request.POST.get('password', False);
-            sql="SELECT `id` FROM `log_id` WHERE `name`=%s and `password`=%s"
+            password = request.POST.get('password', False)
+            sql1="SELECT `id` FROM `log_id` WHERE `name`=%s and `password`=%s"
             values=(request.POST['name'], password)
-            cursor.execute(sql,values)
+            print values
+            cursor.execute(sql1,values)
             final=cursor.fetchall()
+            print request.POST['name']
+            print password
+            print len(final)
+            print final
             if len(final)!=0:
                 return HttpResponseRedirect('/home/')
     return render(request,'login.html',{'log':log})        

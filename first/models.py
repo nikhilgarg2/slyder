@@ -76,7 +76,7 @@ class dump_val(models.Model):
     name=models.TextField()
     mrp=models.CharField(max_length=20)
     sp=models.TextField(max_length=20)
-    final_id=models.ForeignKey(website,db_column='final_id')
+    final_id=models.ForeignKey(crawl_url,db_column='final_id')
     crawl_date=models.DateTimeField(auto_now_add=True)
     reconciled=models.BooleanField()
     reconciled_date=models.DateTimeField(auto_now_add=True)

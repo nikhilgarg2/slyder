@@ -1,7 +1,7 @@
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
-        'NAME': 'slyder',
+        'NAME': 'dtry',
     	'USER': 'root',
 	'PASSWORD': 'dellxps123',
  	'OPTIONS':{
