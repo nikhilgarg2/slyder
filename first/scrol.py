@@ -12,8 +12,9 @@ from .snap import snap_crawl
 
 def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
     
-    sql1="SELECT * FROM `crawl_url` WHERE `id`='%s'" % crawl
-    cursor.execute(sql1)
+    sql1="SELECT * FROM `crawl_url` WHERE `id`=%s"
+    value=crawl
+    cursor.execute(sql1,value)
     trying=cursor.fetchone()
     driver=webdriver.Firefox()
     driver.get(trying[2])

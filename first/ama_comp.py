@@ -43,13 +43,15 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
             m=get2(e,maxrp)
             if m==0:
                m=s
+            if not p:
+                p="N/A"
             sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
                  `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
             values=(p,n,m,s,try2[1],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
             cursor.execute(sql1,values)
             db.commit()
     
-
+    print "not empty"
     driver1=webdriver.Firefox()
     for z in links:
         lk=z.get_attribute('href')
