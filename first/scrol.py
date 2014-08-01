@@ -18,8 +18,9 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
     trying=cursor.fetchone()
     driver=webdriver.Firefox()
     driver.get(trying[2])
-    sql1="SELECT * FROM `scroll` WHERE `web_id`='%d'" %(int(trying[1]))
-    cursor.execute(sql1)
+    sql1="SELECT * FROM `scroll` WHERE `web_id`=%s"
+    value1=(trying[1])
+    cursor.execute(sql1,value1)
     final=cursor.fetchone()
     #print "done"
     #print final
