@@ -1,3 +1,5 @@
+import sys
+sys.path.append(os.path.abspath('../..'))
 from selenium import webdriver
 import MySQLdb
 import time
@@ -46,8 +48,8 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
             if not p:
                 p="N/A"
             sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
-                 `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
-            values=(p,n,m,s,try2[1],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
+                         `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
+            values=(p,n,m,s,try2[0],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
             cursor.execute(sql1,values)
             db.commit()
     
@@ -79,7 +81,7 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
                        m=s
                  sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
                          `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
-                 values=(p,n,m,s,try2[1],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
+                 values=(p,n,m,s,try2[0],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
                  cursor.execute(sql1,values)
                  db.commit()
                  r=[]
@@ -98,7 +100,7 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
                        m=s
                     sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
                          `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
-                    values=(p,n,m,s,try2[1],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
+                    values=(p,n,m,s,try2[0],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
                     cursor.execute(sql1,values)
                     db.commit()
                                
@@ -117,7 +119,7 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
                        m=s
               sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
                          `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
-              values=(p,n,m,s,try2[1],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
+              values=(p,n,m,s,try2[0],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
               cursor.execute(sql1,values)
               db.commit()
               r=[]
@@ -137,7 +139,7 @@ def compile3(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
                     m=s
                 sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
                         `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
-                values=(p,n,m,s,try2[1],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
+                values=(p,n,m,s,try2[0],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
                 cursor.execute(sql1,values)
                 db.commit()            
     driver1.close()    

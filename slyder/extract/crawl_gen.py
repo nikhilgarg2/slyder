@@ -1,4 +1,7 @@
-from .connect import *
+import os
+import sys
+sys.path.append(os.path.abspath('../'))
+from slyder.connect import *
 from selenium import webdriver
 import MySQLdb
 import time
@@ -20,8 +23,9 @@ def get2(r,attri):
 
 
 def compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
-    sql="SELECT * FROM `final` WHERE `crawl_id`=%s" % crawl
-    cursor.execute(sql)
+    sql="SELECT * FROM `final` WHERE `crawl_id`=%s" 
+    value=(crawl)
+    cursor.execute(sql,value)
     trying=cursor.fetchone()
     parent=[]
     parent=driver.find_elements_by_css_selector(css)
@@ -39,7 +43,7 @@ def compile2(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
             m=s
         sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
              `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
-        values=(p,n,m,s,try2[1],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
+        values=(p,n,m,s,try2[0],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))
         cursor.execute(sql1,values)
         db.commit()
     

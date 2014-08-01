@@ -1,4 +1,7 @@
-from .connect import *
+import os
+import sys
+sys.path.append(os.path.abspath('../'))
+from slyder.connect import *
 import MySQLdb
 import time
 import re
@@ -54,16 +57,14 @@ def reconcile(category):
         
     
     else:
-        sql="SELECT * FROM `item_done` WHERE `cat_id`=%d" % int(category)
-        
-        cursor.execute(sql)
+        sql="SELECT * FROM `item_done` WHERE `cat_id`=%s"
+        value=(category)
+        cursor.execute(sql,category)
         array=cursor.fetchall()
         sql2="SELECT * FROM `dump_val`"
         cursor.execute(sql2)
         array2=cursor.fetchall()
-        #print 'true'
         for e in range(len(array2)):
-            #print len(array2)
             x=str(array2[e][2]).lower()
             x= x=re.sub(r'[^a-z^A-Z^0-9^\ ^\.^\%]','',x)
             m= re.sub(r'[^0-9^\.]','',array2[e][3])
@@ -80,7 +81,7 @@ def reconcile(category):
                         t=True
                         mrt=rat    
                         i_id=array[j][2]    
-           # print t
+           
             if t==False:
                 sql2="INSERT INTO `item`(`name`,`category_id`) VALUES(%s,%s)"
                 values=(x,category)

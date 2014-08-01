@@ -55,7 +55,7 @@
             {% for country1 in country2 %}
                  
                  {% for item in country1.list %}
-                    {% if "healthkart"|slugify in item.crawl_id|slugify %}
+                    {% if "healthkart"|slugify in item.crawl_id.website_id|slugify %}
                     
                         <tr style="color: red">                     
                             <td>
@@ -71,7 +71,7 @@
                              </td>
         
                              <td>
-                                 <div style="margin: 5px;">{{item.crawl_id}}</div>
+                                 <div style="margin: 5px;">{{item.crawl_id.website_id}}</div>
                              </td>               
                         </tr>                                       
                 
@@ -92,7 +92,7 @@
                             </td>
         
                             <td>
-                                <div style="margin: 5px;">{{item.crawl_id}}</div>
+                                <div style="margin: 5px;">{{item.crawl_id.website_id}}</div>
                             </td>   
                         </tr>  
                     {% endif %}

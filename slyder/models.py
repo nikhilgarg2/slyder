@@ -1,7 +1,8 @@
+
 from django.db import models
 from django.utils.encoding import smart_unicode      
 from django import forms
-from .dumpi import dump2
+from reconcile.dumpi import dump2
 
 class website(models.Model):
     class Meta:
@@ -94,7 +95,7 @@ class item(models.Model):
 class item_done(models.Model):
     class Meta:
         db_table='item_done'
-    crawl_id=models.ForeignKey(website,db_column='crawl_id')
+    crawl_id=models.ForeignKey(crawl_url,db_column='crawl_id')
     item_id=models.ForeignKey(item,db_column='item_id')
     cat_id=models.ForeignKey(cat,db_column='cat_id')
     website_item=models.CharField(max_length=45)
