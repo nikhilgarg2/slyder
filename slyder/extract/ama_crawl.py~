@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath('../'))
 from selenium import webdriver
 import MySQLdb
 import time
-from slyder.settings.connect import *
+from slyder.connect import *
 from django.shortcuts import render,render_to_response, RequestContext
 from django.http import HttpResponseRedirect
 

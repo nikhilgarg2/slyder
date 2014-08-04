@@ -1,11 +1,11 @@
 import os
 import sys
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath('../..'))
 from selenium import webdriver
 import MySQLdb
 import time
 #from .compile import compile1
-from .connect import *
+from slyder.connect import *
 
 def dump2(crawl):
     sql="SELECT * FROM `item_done` WHERE `crawl_id`=%s"

@@ -1,10 +1,11 @@
+import os
 import sys
-sys.path.append(os.path.abspath('../..'))
+sys.path.append(os.path.abspath('../'))
 import time
 from selenium import webdriver
 import MySQLdb
 import re
-from .connect import *
+from slyder.connect import *
 
 
 def get_name(driver1):

@@ -5,7 +5,7 @@ import time
 from selenium import webdriver
 import MySQLdb
 import re
-from slyder.connect import *
+from slyder.settings.connect import *
 
 
 def get_name(driver1):
@@ -87,7 +87,7 @@ def snap_crawl1(css,prod, proda, naam, maxrp, sellp,driver,crawl,category):
                 mrp=get_mrp(driver1)
                 sp=get_sp(driver1)
                 prod=get_prod(driver1)
-                print prod
+                #print prod
                 sql1="INSERT INTO `dump_val`(`crawl_item_id`,`name`,`mrp`,`sp`,`final_id`,`crawl_date`,`reconciled`,\
                          `reconciled_date`) VALUES(%s,%s,%s,%s,%s,%s,FALSE,%s)"
                 values=(prod,name,mrp,sp,try2[0],time.strftime('%Y-%m-%d %H:%M:%S'),time.strftime('%Y-%m-%d %H:%M:%S'))

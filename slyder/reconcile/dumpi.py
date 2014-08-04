@@ -5,7 +5,7 @@ from selenium import webdriver
 import MySQLdb
 import time
 #from .compile import compile1
-from slyder.connect import *
+from slyder.settings.connect import *
 
 def dump2(crawl):
     sql="SELECT * FROM `item_done` WHERE `crawl_id`=%s"

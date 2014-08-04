@@ -1,7 +1,7 @@
 import os
 import sys
 sys.path.append(os.path.abspath('../'))
-from slyder.connect import *
+from slyder.settings.connect import *
 import MySQLdb
 import time
 import re

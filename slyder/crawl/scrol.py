@@ -5,7 +5,7 @@ from selenium import webdriver
 import MySQLdb
 import time
 #from .compile import compile1
-from slyder.connect import *
+from slyder.settings.connect import *
 from slyder.extract.crawl_gen import compile2
 from slyder.reconcile.reconcile import reconcile
 from slyder.extract.ama_crawl import compile3
@@ -26,8 +26,8 @@ def scroll_first(css,prod, proda, naam, maxrp, sellp, crawl,category):
     value1=(trying[1])
     cursor.execute(sql1,value1)
     final=cursor.fetchone()
-    print trying[1]
-    print final
+    #print trying[1]
+    #print final
     if final[1]==False:
      dump2(crawl)
      quer="SELECT `address` FROM `website` WHERE `id`=%s"

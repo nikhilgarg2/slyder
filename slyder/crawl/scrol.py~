@@ -5,10 +5,10 @@ from selenium import webdriver
 import MySQLdb
 import time
 #from .compile import compile1
-from slyder.connect import *
-from slyder.extract.dump import compile2
+from slyder.settungs.connect import *
+from slyder.extract.crawl_gen import compile2
 from slyder.reconcile.reconcile import reconcile
-from slyder.extract.ama_comp import compile3
+from slyder.extract.ama_crawl import compile3
 from slyder.reconcile.dumpi import dump2
 from slyder.extract.snap_crawl import snap_crawl1
 

@@ -1,4 +1,6 @@
-
+#import os
+#import sys
+#sys.path.append(os.path.abspath('../'))
 from django.db import models
 from django.utils.encoding import smart_unicode      
 from django import forms

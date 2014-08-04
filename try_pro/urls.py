@@ -1,13 +1,13 @@
 from django.conf.urls import patterns, include, url
-from slyder.views import my_view 
+from slyder.settings.views import my_view 
 #from first.views import home
-from slyder.views import search123
-from slyder.views import add_details
+from slyder.settings.views import search123
+from slyder.settings.views import add_details
 from django.contrib import admin
 admin.autodiscover()
 from django.conf import settings
 from django.conf.urls.static import static
-from slyder.views import login1
+from slyder.settings.views import login1
 
 urlpatterns = patterns('',
     # Examples:
